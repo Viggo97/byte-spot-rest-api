@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ByteSpot.Api/ByteSpot.Api.csproj" />
+    <Project Path="src/ByteSpot.Application/ByteSpot.Application.csproj" />
+    <Project Path="src/ByteSpot.Domain/ByteSpot.Domain.csproj" />
+    <Project Path="src/ByteSpot.Infrastructure/ByteSpot.Infrastructure.csproj" />
+  </Folder>
+</Solution>
