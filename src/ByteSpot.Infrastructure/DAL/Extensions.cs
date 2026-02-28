@@ -1,4 +1,6 @@
-﻿using ByteSpot.Infrastructure.DAL.Database;
+﻿using ByteSpot.Domain.Repositories;
+using ByteSpot.Infrastructure.DAL.Database;
+using ByteSpot.Infrastructure.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +18,11 @@ internal static class Extensions
         services
             .AddDbContext<ByteSpotDbContext>(options => options.UseNpgsql(postgresOptions.ConnectionString))
             .AddHostedService<DatabaseInitializer>()
-            .AddScoped<DatabaseSeeder>();
+            .AddScoped<DatabaseSeeder>()
+            .AddScoped<ILocationRepository, PostgresLocationRepository>()
+            .AddScoped<ITechnologyRepository, PostgresTechnologyRepository>()
+            .AddScoped<ICompanyRepository, PostgresCompanyRepository>()
+            .AddScoped<IOfferRepository, PostgresOfferRepository>();
         
         return services;
     }
