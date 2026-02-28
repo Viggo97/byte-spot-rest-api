@@ -1,5 +1,8 @@
-﻿using ByteSpot.Domain.Repositories;
+﻿using ByteSpot.Application.Abstractions;
+using ByteSpot.Domain.Repositories;
+using ByteSpot.Infrastructure.Abstractions;
 using ByteSpot.Infrastructure.DAL.Database;
+using ByteSpot.Infrastructure.DAL.Decorators;
 using ByteSpot.Infrastructure.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,10 +22,15 @@ internal static class Extensions
             .AddDbContext<ByteSpotDbContext>(options => options.UseNpgsql(postgresOptions.ConnectionString))
             .AddHostedService<DatabaseInitializer>()
             .AddScoped<DatabaseSeeder>()
+            .AddScoped<IUnitOfWork, PostgresUnitOfWork>()
             .AddScoped<ILocationRepository, PostgresLocationRepository>()
             .AddScoped<ITechnologyRepository, PostgresTechnologyRepository>()
             .AddScoped<ICompanyRepository, PostgresCompanyRepository>()
             .AddScoped<IOfferRepository, PostgresOfferRepository>();
+
+        // TODO uncomment while commands implementation
+        // services
+        //     .Decorate(typeof(ICommandHandler<>), typeof(CommandHandlerUnitOfWorkDecorator<>));
         
         return services;
     }
