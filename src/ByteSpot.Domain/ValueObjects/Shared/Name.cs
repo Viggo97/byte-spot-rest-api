@@ -15,7 +15,7 @@ public sealed record Name
         
         var trimmedValue = value.Trim();
         
-        const int minLength = 2;
+        const int minLength = 1;
         const int maxLength = 128;
         if (value.Length is > maxLength or < minLength)
         {
