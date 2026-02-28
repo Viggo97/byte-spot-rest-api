@@ -16,7 +16,15 @@ public sealed record Identifier
         Value = value;
     }
 
-    public static Identifier Create() => Guid.NewGuid();
+    public Identifier(string value)
+    {
+        if (value == string.Empty)
+        {
+            throw new  InvalidIdentifierException(value);
+        }
+        
+        Value = Guid.Parse(value);
+    }
 
     public static implicit operator Guid(Identifier id)
         => id.Value;
