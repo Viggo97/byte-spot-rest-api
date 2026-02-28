@@ -7,7 +7,7 @@ public class Location
     public Identifier Id { get; private set; }
     public Name Name { get; private set; }
     
-    public ICollection<Offer> Offers = new List<Offer>();
+    public ICollection<Offer> Offers { get; private set; } = new List<Offer>();
 
     private Location(Identifier id, Name name)
     {

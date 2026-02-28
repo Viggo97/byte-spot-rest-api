@@ -9,7 +9,7 @@ public class Technology
     public Name Name { get; private set; }
     public IconCode IconCode { get; private set; }
     
-    public ICollection<Offer> Offers = new List<Offer>();
+    public ICollection<Offer> Offers { get; private set; } = new List<Offer>();
 
     private Technology(Identifier id, Name name, IconCode iconCode)
     {
