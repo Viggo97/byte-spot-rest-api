@@ -23,10 +23,13 @@ internal static class Extensions
             .AddHostedService<DatabaseInitializer>()
             .AddScoped<DatabaseSeeder>()
             .AddScoped<IUnitOfWork, PostgresUnitOfWork>()
+            .AddScoped<IOfferRepository, PostgresOfferRepository>()
+            .AddScoped<ICompanyRepository, PostgresCompanyRepository>()
             .AddScoped<ILocationRepository, PostgresLocationRepository>()
             .AddScoped<ITechnologyRepository, PostgresTechnologyRepository>()
-            .AddScoped<ICompanyRepository, PostgresCompanyRepository>()
-            .AddScoped<IOfferRepository, PostgresOfferRepository>();
+            .AddScoped<IWorkModeRepository, PostgresWorkModeRepository>()
+            .AddScoped<IExperienceLevelRepository, PostgresExperienceLevelRepository>()
+            .AddScoped<IEmploymentTypeRepository, PostgresEmploymentTypeRepository>();
 
         // TODO uncomment while commands implementation
         // services

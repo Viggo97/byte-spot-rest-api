@@ -54,5 +54,35 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
                 l => l.HasOne(typeof(Offer)).WithMany().HasForeignKey("OfferId"),
                 j => j.HasKey("OfferId", "TechnologyId")
             );
+        
+        builder
+            .HasMany(offer => offer.WorkModes)
+            .WithMany(workMode => workMode.Offers)
+            .UsingEntity(
+                "OfferWorkMode",
+                r => r.HasOne(typeof(WorkMode)).WithMany().HasForeignKey("WorkModeId"),
+                l => l.HasOne(typeof(Offer)).WithMany().HasForeignKey("OfferId"),
+                j => j.HasKey("OfferId", "WorkModeId")
+            );
+
+        builder
+            .HasMany(offer => offer.EmploymentTypes)
+            .WithMany(employmentType => employmentType.Offers)
+            .UsingEntity(
+                "OfferEmploymentType",
+                r => r.HasOne(typeof(EmploymentType)).WithMany().HasForeignKey("EmploymentTypeId"),
+                l => l.HasOne(typeof(Offer)).WithMany().HasForeignKey("OfferId"),
+                j => j.HasKey("OfferId", "EmploymentTypeId")
+            );
+
+        builder
+            .HasMany(offer => offer.ExperienceLevels)
+            .WithMany(experienceLevel => experienceLevel.Offers)
+            .UsingEntity(
+                "OfferExperienceLevel",
+                r => r.HasOne(typeof(ExperienceLevel)).WithMany().HasForeignKey("ExperienceLevelId"),
+                l => l.HasOne(typeof(Offer)).WithMany().HasForeignKey("OfferId"),
+                j => j.HasKey("OfferId", "ExperienceLevelId")
+            );
     }
 }

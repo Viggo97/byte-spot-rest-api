@@ -10,10 +10,292 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
 {
     public async Task SeedAsync()
     {
+        await AddCompanies();
         await AddLocations();
         await AddTechnologies();
-        await AddCompanies();
+        await AddWorkModes();
+        await AddExperienceLevels();
+        await AddEmploymentTypes();
         await AddOffers();
+    }
+
+    private async Task AddOffers()
+    {
+        if (!dbContext.Offers.Any())
+        {
+            var locations = await dbContext.Locations.ToListAsync();
+            var technologies = await dbContext.Technologies.ToListAsync();
+            var companies = await dbContext.Companies.ToListAsync();
+            var workModes = await dbContext.WorkModes.ToListAsync();
+            var experienceLevels = await dbContext.ExperienceLevels.ToListAsync();
+            var employmentTypes = await dbContext.EmploymentTypes.ToListAsync();
+            
+            var offers = new List<Offer>()
+            {
+                CreateOffer(
+                    new Identifier("cd11aea2-9a6c-4462-b16b-570d75247129"),
+                    "JavaScript Developer",
+                    new Salary(12_000, 18_000),
+                    companies[0].Id,
+                    ["Warszawa", "Bydgoszcz"],
+                    ["JavaScript", "TypeScript"],
+                    ["Remote", "Hybrid"],
+                    ["Regular"],
+                    ["EmploymentContract", "B2B"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("df08859f-df88-45bb-b59a-cd856e578f16"),
+                    "Java Developer",
+                    new Salary(13_000, 16_000),
+                    companies[1].Id,
+                    ["Wrocław"],
+                    ["Java", "Mobile"],
+                    ["Hybrid", "OnSite"],
+                    ["Regular", "Senior"],
+                    ["B2B", "MandateContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("8cae5d4f-eb4a-4a15-b504-6ee321ee1534"),
+                    "Senior C# Developer",
+                    new Salary(18_500),
+                    companies[2].Id,
+                    ["Kraków", "Wrocław", "Warszawa", "Poznań", "Gdańsk", "Katowice", "Łódź"],
+                    ["C#", "SQL", "Azure"],
+                    ["Remote"],
+                    ["Senior"],
+                    ["B2B"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("db657ff0-115b-484b-b19a-51704e8dbc93"),
+                    "Junior Go Developer",
+                    new Salary(12_000),
+                    companies[3].Id,
+                    ["Kraków"],
+                    ["Go", "Python"],
+                    ["OnSite"],
+                    ["Intern", "Junior"],
+                    ["MandateContract", "SpecificTaskContract", "Internship"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("f46fc3a8-be21-4451-91e4-45015f71e4df"),
+                    "Python Developer",
+                    new Salary(13_500, 19_000),
+                    companies[4].Id,
+                    ["Toruń", "Poznań"],
+                    ["SQL", "Python"],
+                    ["Hybrid"],
+                    ["Regular", "Senior"],
+                    ["EmploymentContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("87ab8cad-f4a7-4e7e-a174-b8618c93ecf5"),
+                    "Senior Java Developer",
+                    new Salary(14_500, 17_500),
+                    companies[5].Id,
+                    ["Kraków", "Katowice", "Gliwice"],
+                    ["AWS", "Java"],
+                    ["Remote", "Hybrid"],
+                    ["Senior"],
+                    ["B2B", "SpecificTaskContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("44c4509c-d56f-422c-b601-35d5c69283e7"),
+                    "TypeScript Developer",
+                    new Salary(15_000),
+                    companies[6].Id,
+                    ["Białystok"],
+                    ["TypeScript", "Python"],
+                    ["Remote"],
+                    ["Regular"],
+                    ["EmploymentContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("6a37b912-d8f6-488c-aa6d-c1c7a5bd3026"),
+                    "Senior JavaScript Developer",
+                    new Salary(15_500, 17_500),
+                    companies[0].Id,
+                    ["Warszawa", "Kraków"],
+                    ["TypeScript", "SQL", "PHP"],
+                    ["Remote"],
+                    ["Senior"],
+                    ["EmploymentContract", "B2B"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("923c67af-ec64-4d20-a0b7-ba423d2faee5"),
+                    "Senior C# Developer",
+                    new Salary(15_000, 19_000),
+                    companies[1].Id,
+                    ["Zeilona Góra", "Gorzów Wielkopolski"],
+                    ["C#", "Azure"],
+                    ["Remote", "Hybrid", "OnSite"],
+                    ["Senior"],
+                    ["B2B", "MandateContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("9db0fdfd-d032-4b78-b850-75c7d90a8468"),
+                    "Lead Python Developer",
+                    new Salary(19_000, 24_000),
+                    companies[2].Id,
+                    ["Bydgoszcz", "Toruń", "Szczecin"],
+                    ["AWS", "Python"],
+                    ["Remote"],
+                    ["Lead"],
+                    ["EmploymentContract", "B2B", "MandateContract", "SpecificTaskContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("34744eb2-da49-4314-a49d-a42b9f0efbea"),
+                    "Junior C# Developer",
+                    new Salary(10_000, 11_500),
+                    companies[3].Id,
+                    ["Kielce", "Łódź"],
+                    ["C#", "SQL"],
+                    ["OnSite"],
+                    ["Junior"],
+                    ["Internship"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("f6f910b8-6667-425d-95e9-74810ff62b6e"),
+                    "Fullstack Developer",
+                    new Salary(14_000, 18_500),
+                    companies[4].Id,
+                    ["Gorzów Wielkopolski", "Zielona Góra"],
+                    ["AWS", "Azure", "TypeScript", "JavaScript", "Python", "SQL"],
+                    ["Hybrid"],
+                    ["Regular", "Senior", "Lead"],
+                    ["EmploymentContract", "B2B"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("1a5a4855-247d-49c6-9b43-b488317881ca"),
+                    "Senior Rust Developer",
+                    new Salary(20_000, 25_000),
+                    companies[5].Id,
+                    ["Wrocław"],
+                    ["Rust", "C"],
+                    ["Remote"],
+                    ["Senior", "Lead"],
+                    ["B2B"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("89ea7c6e-e49a-48d5-8439-03e21263b66e"),
+                    "Mobile Developer",
+                    new Salary(11_000, 17_000),
+                    companies[6].Id,
+                    ["Rzeszów", "Lublin"],
+                    ["Mobile"],
+                    ["Remote", "Hybrid"],
+                    ["Regular", "Senior"],
+                    ["MandateContract", "SpecificTaskContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("ed31f986-09c2-4c9e-95ab-ea43e43e16e9"),
+                    "Senior C/C++ Developer",
+                    new Salary(16_000, 22_000),
+                    companies[0].Id,
+                    ["Gdańsk", "Gdynia", "Sopot"],
+                    ["C", "C++", "C#"],
+                    ["Hybrid", "OnSite"],
+                    ["Senior"],
+                    ["EmploymentContract", "B2B"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("76dbce69-81ad-4ccb-befa-2707d94e25b5"),
+                    "Junior JavaScript Developer",
+                    new Salary(10_000),
+                    companies[1].Id,
+                    ["Warszawa", "Kraków", "Wrocław", "Łódź", "Poznań", "Lublin"],
+                    ["JavaScript"],
+                    ["OnSite"],
+                    ["Intern"],
+                    ["SpecificTaskContract", "Internship"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                    ),
+                CreateOffer(
+                    new Identifier("0e278e45-3b6c-42b9-90ce-e902034cbf18"),
+                    "Rust Developer",
+                    new Salary(14_000, 19_000),
+                    companies[2].Id,
+                    ["Warszawa", "Kraków"],
+                    ["Rust", "SQL"],
+                    ["Remote"],
+                    ["Regular"],
+                    ["EmploymentContract", "B2B"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("c74f934f-50e2-4655-9a37-2281cfddb043"),
+                    "Senior Fullstack Developer",
+                    new Salary(17_000, 22_000),
+                    companies[3].Id,
+                    ["Katowice", "Gliwice"],
+                    ["TypeScript", "Python", "SQL"],
+                    ["Remote", "Hybrid"],
+                    ["Regular", "Senior", "Lead"],
+                    ["EmploymentContract", "B2B", "MandateContract", "SpecificTaskContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("7ee41092-960f-4b93-8a8d-27fb32e30855"),
+                    "Junior C# Developer",
+                    new Salary(7_000, 10_000),
+                    companies[4].Id,
+                    ["Kraków", "Wrocław"],
+                    ["Azure", "C#"],
+                    ["Hybrid", "OnSite"],
+                    ["Intern", "Junior"],
+                    ["EmploymentContract", "B2B", "MandateContract", "Internship"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+                CreateOffer(
+                    new Identifier("d36d28ac-1ec1-4e4a-bc31-1d353a3db78e"),
+                    "Junior Python Developer",
+                    new Salary(8_000, 11_000),
+                    companies[5].Id,
+                    ["Warszawa", "Gdańsk"],
+                    ["SQL", "Python", "JavaScript"],
+                    ["OnSite"],
+                    ["Junior"],
+                    ["EmploymentContract"],
+                    locations, technologies, workModes, experienceLevels, employmentTypes
+                ),
+            };
+
+            await dbContext.Offers.AddRangeAsync(offers);
+            await dbContext.SaveChangesAsync();
+        }
+    }
+    
+    private async Task AddCompanies()
+    {
+        if (!dbContext.Companies.Any())
+        {
+            var companies = new List<Company>()
+            {
+                Company.Create(new Identifier("cfdc385e-6ce6-41df-9b9e-1538450c824c"), "Amazon"),
+                Company.Create(new Identifier("c3fe179a-5e81-4e18-8c59-f53519187afa"), "Apple"),
+                Company.Create(new Identifier("5c1f5397-93b9-4e8f-bc78-f5ce56de46ff"), "Google"),
+                Company.Create(new Identifier("2febbdb9-5874-4968-bdd5-d7089fde7b13"), "Meta"),
+                Company.Create(new Identifier("893ce20d-329c-4417-b68f-54a01572ab2d"), "Microsoft"),
+                Company.Create(new Identifier("0cbde627-f281-49d4-8a89-5525a8776cf5"), "Netflix"),
+                Company.Create(new Identifier("f371e4a6-016e-4d30-bbd9-08eef2e3dcc1"), "Oracle"),
+            };
+            await dbContext.Companies.AddRangeAsync(companies);
+            await dbContext.SaveChangesAsync();
+        }
     }
 
     private async Task AddLocations()
@@ -102,226 +384,63 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
             await dbContext.SaveChangesAsync();
         }
     }
-
-    private async Task AddCompanies()
+    
+    private async Task AddWorkModes()
     {
-        if (!dbContext.Companies.Any())
+        if (!dbContext.WorkModes.Any())
         {
-            var companies = new List<Company>()
+            var workModes = new List<WorkMode>()
             {
-                Company.Create(new Identifier("cfdc385e-6ce6-41df-9b9e-1538450c824c"), "Amazon"),
-                Company.Create(new Identifier("c3fe179a-5e81-4e18-8c59-f53519187afa"), "Apple"),
-                Company.Create(new Identifier("5c1f5397-93b9-4e8f-bc78-f5ce56de46ff"), "Google"),
-                Company.Create(new Identifier("2febbdb9-5874-4968-bdd5-d7089fde7b13"), "Meta"),
-                Company.Create(new Identifier("893ce20d-329c-4417-b68f-54a01572ab2d"), "Microsoft"),
-                Company.Create(new Identifier("0cbde627-f281-49d4-8a89-5525a8776cf5"), "Netflix"),
-                Company.Create(new Identifier("f371e4a6-016e-4d30-bbd9-08eef2e3dcc1"), "Oracle"),
+                WorkMode.Create(1, "OnSite"),
+                WorkMode.Create(2, "Hybrid"),
+                WorkMode.Create(3, "Remote"),
             };
-            await dbContext.Companies.AddRangeAsync(companies);
+
+            await dbContext.WorkModes.AddRangeAsync(workModes);
             await dbContext.SaveChangesAsync();
         }
     }
-
-    private async Task AddOffers()
+    
+    private async Task AddExperienceLevels()
     {
-        if (!dbContext.Offers.Any())
+        if (!dbContext.ExperienceLevels.Any())
         {
-            var locations = await dbContext.Locations.ToListAsync();
-            var technologies = await dbContext.Technologies.ToListAsync();
-            var companies = await dbContext.Companies.ToListAsync();
-
-            var offers = new List<Offer>()
+            var experienceLevels = new List<ExperienceLevel>()
             {
-                CreateOffer(
-                    new Identifier("cd11aea2-9a6c-4462-b16b-570d75247129"),
-                    "JavaScript Developer",
-                    new Salary(12_000, 18_000),
-                    companies[0].Id,
-                    ["Warszawa", "Bydgoszcz"],
-                    ["JavaScript", "TypeScript"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("df08859f-df88-45bb-b59a-cd856e578f16"),
-                    "Java Developer",
-                    new Salary(13_000, 16_000),
-                    companies[1].Id,
-                    ["Wrocław"],
-                    ["Java", "Mobile"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("8cae5d4f-eb4a-4a15-b504-6ee321ee1534"),
-                    "Senior C# Developer",
-                    new Salary(18_500),
-                    companies[2].Id,
-                    ["Kraków", "Wrocław", "Warszawa", "Poznań", "Gdańsk", "Katowice", "Łódź"],
-                    ["C#", "SQL", "Azure"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("db657ff0-115b-484b-b19a-51704e8dbc93"),
-                    "Junior Go Developer",
-                    new Salary(12_000),
-                    companies[3].Id,
-                    ["Kraków"],
-                    ["Go", "Python"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("f46fc3a8-be21-4451-91e4-45015f71e4df"),
-                    "Python Developer",
-                    new Salary(13_500, 19_000),
-                    companies[4].Id,
-                    ["Toruń", "Poznań"],
-                    ["SQL", "Python"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("87ab8cad-f4a7-4e7e-a174-b8618c93ecf5"),
-                    "Senior Java Developer",
-                    new Salary(14_500, 17_500),
-                    companies[5].Id,
-                    ["Kraków", "Katowice", "Gliwice"],
-                    ["AWS", "Java"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("44c4509c-d56f-422c-b601-35d5c69283e7"),
-                    "TypeScript Developer",
-                    new Salary(15_000),
-                    companies[6].Id,
-                    ["Białystok"],
-                    ["TypeScript", "Python"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("6a37b912-d8f6-488c-aa6d-c1c7a5bd3026"),
-                    "Senior JavaScript Developer",
-                    new Salary(15_500, 17_500),
-                    companies[0].Id,
-                    ["Warszawa", "Kraków"],
-                    ["TypeScript", "SQL", "PHP"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("923c67af-ec64-4d20-a0b7-ba423d2faee5"),
-                    "Senior C# Developer",
-                    new Salary(15_000, 19_000),
-                    companies[1].Id,
-                    ["Zeilona Góra", "Gorzów Wielkopolski"],
-                    ["C#", "Azure"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("9db0fdfd-d032-4b78-b850-75c7d90a8468"),
-                    "Lead Python Developer",
-                    new Salary(19_000, 24_000),
-                    companies[2].Id,
-                    ["Bydgoszcz", "Toruń", "Szczecin"],
-                    ["AWS", "Python"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("34744eb2-da49-4314-a49d-a42b9f0efbea"),
-                    "Junior C# Developer",
-                    new Salary(10_000, 11_500),
-                    companies[3].Id,
-                    ["Kielce", "Łódź"],
-                    ["C#", "SQL"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("f6f910b8-6667-425d-95e9-74810ff62b6e"),
-                    "Fullstack Developer",
-                    new Salary(14_000, 18_500),
-                    companies[4].Id,
-                    ["Gorzów Wielkopolski", "Zielona Góra"],
-                    ["AWS", "Azure", "TypeScript", "JavaScript", "Python", "SQL"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("1a5a4855-247d-49c6-9b43-b488317881ca"),
-                    "Senior Rust Developer",
-                    new Salary(20_000, 25_000),
-                    companies[5].Id,
-                    ["Wrocław"],
-                    ["Rust", "C"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("89ea7c6e-e49a-48d5-8439-03e21263b66e"),
-                    "Mobile Developer",
-                    new Salary(11_000, 17_000),
-                    companies[6].Id,
-                    ["Rzeszów", "Lublin"],
-                    ["Mobile"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("ed31f986-09c2-4c9e-95ab-ea43e43e16e9"),
-                    "Senior C/C++ Developer",
-                    new Salary(16_000, 22_000),
-                    companies[0].Id,
-                    ["Gdańsk", "Gdynia", "Sopot"],
-                    ["C", "C++", "C#"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("76dbce69-81ad-4ccb-befa-2707d94e25b5"),
-                    "Junior JavaScript Developer",
-                    new Salary(10_000),
-                    companies[1].Id,
-                    ["Warszawa", "Kraków", "Wrocław", "Łódź", "Poznań", "Lublin"],
-                    ["JavaScript"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("0e278e45-3b6c-42b9-90ce-e902034cbf18"),
-                    "Rust Developer",
-                    new Salary(14_000, 19_000),
-                    companies[2].Id,
-                    ["Warszawa", "Kraków"],
-                    ["Rust", "SQL"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("c74f934f-50e2-4655-9a37-2281cfddb043"),
-                    "Senior Fullstack Developer",
-                    new Salary(17_000, 22_000),
-                    companies[3].Id,
-                    ["Katowice", "Gliwice"],
-                    ["TypeScript", "Python", "SQL"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("7ee41092-960f-4b93-8a8d-27fb32e30855"),
-                    "Junior C# Developer",
-                    new Salary(7_000, 10_000),
-                    companies[4].Id,
-                    ["Kraków", "Wrocław"],
-                    ["Azure", "C#"],
-                    locations, technologies
-                ),
-                CreateOffer(
-                    new Identifier("d36d28ac-1ec1-4e4a-bc31-1d353a3db78e"),
-                    "Junior Python Developer",
-                    new Salary(8_000, 11_000),
-                    companies[5].Id,
-                    ["Warszawa", "Gdańsk"],
-                    ["SQL", "Python", "JavaScript"],
-                    locations, technologies
-                ),
+                ExperienceLevel.Create(1, "Intern"),
+                ExperienceLevel.Create(2, "Junior"),
+                ExperienceLevel.Create(3, "Regular"),
+                ExperienceLevel.Create(4, "Senior"),
+                ExperienceLevel.Create(5, "Lead"),
             };
 
-            await dbContext.Offers.AddRangeAsync(offers);
+            await dbContext.ExperienceLevels.AddRangeAsync(experienceLevels);
+            await dbContext.SaveChangesAsync();
+        }
+    }
+    
+    private async Task AddEmploymentTypes()
+    {
+        if (!dbContext.EmploymentTypes.Any())
+        {
+            var employmentTypes = new List<EmploymentType>()
+            {
+                EmploymentType.Create(1, "EmploymentContract"),
+                EmploymentType.Create(2, "B2B"),
+                EmploymentType.Create(3, "MandateContract"),
+                EmploymentType.Create(4, "SpecificTaskContract"),
+                EmploymentType.Create(5, "Internship"),
+            };
+
+            await dbContext.EmploymentTypes.AddRangeAsync(employmentTypes);
             await dbContext.SaveChangesAsync();
         }
     }
 
     private static Offer CreateOffer(Identifier id, Title title, Salary salary, Identifier companyId,
-        string[] locationNames, string[] technologiesNames,
-        List<Location> locations, List<Technology> technologies)
+        string[] locationNames, string[] technologyNames, string[] workModesNames, string[] experienceLevelsNames,
+        string[] employmentTypeNames, List<Location> locations, List<Technology> technologies, List<WorkMode> workModes,
+        List<ExperienceLevel> experienceLevels, List<EmploymentType> employmentTypes)
     {
         var offer = Offer.Create(
             id,
@@ -339,12 +458,39 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
             }
         }
         
-        foreach (var technologyName in technologiesNames)
+        foreach (var technologyName in technologyNames)
         {
             var technology = technologies.SingleOrDefault(l => l.Name == technologyName);
             if (technology is not null)
             {
                 offer.AddTechnology(technology);
+            }
+        }
+        
+        foreach (var workModeName in workModesNames)
+        {
+            var workMode = workModes.SingleOrDefault(w => w.Name == workModeName);
+            if (workMode is not null)
+            {
+                offer.AddWorkMode(workMode);
+            }
+        }
+        
+        foreach (var experienceLevelName in experienceLevelsNames)
+        {
+            var experienceLevel = experienceLevels.SingleOrDefault(l => l.Name == experienceLevelName);
+            if (experienceLevel is not null)
+            {
+                offer.AddExperienceLevel(experienceLevel);
+            }
+        }
+        
+        foreach (var employmentTypeName in employmentTypeNames)
+        {
+            var employmentType = employmentTypes.SingleOrDefault(t => t.Name == employmentTypeName);
+            if (employmentType is not null)
+            {
+                offer.AddEmploymentType(employmentType);
             }
         }
 

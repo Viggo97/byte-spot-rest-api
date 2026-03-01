@@ -12,6 +12,9 @@ public class Offer
     public Salary Salary { get; private set; }
     public ICollection<Location> Locations { get; private set; } = new List<Location>();
     public ICollection<Technology> Technologies { get; private set; } = new List<Technology>();
+    public ICollection<WorkMode> WorkModes { get; private set; } = new List<WorkMode>();
+    public ICollection<ExperienceLevel> ExperienceLevels { get; private set; } = new List<ExperienceLevel>();
+    public ICollection<EmploymentType> EmploymentTypes { get; private set; } = new List<EmploymentType>();
     
     private Offer() {}
     
@@ -34,5 +37,20 @@ public class Offer
     public void AddTechnology(Technology technology)
     {
         Technologies.Add(technology);
+    }
+
+    public void AddWorkMode(WorkMode workMode)
+    {
+        WorkModes.Add(workMode);
+    }
+    
+    public void AddExperienceLevel(ExperienceLevel experienceLevel)
+    {
+        ExperienceLevels.Add(experienceLevel);
+    }
+
+    public void AddEmploymentType(EmploymentType employmentType)
+    {
+        EmploymentTypes.Add(employmentType);
     }
 }
