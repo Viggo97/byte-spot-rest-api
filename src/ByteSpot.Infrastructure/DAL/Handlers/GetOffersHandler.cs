@@ -1,0 +1,97 @@
+﻿using ByteSpot.Application.Abstractions;
+using ByteSpot.Application.Common;
+using ByteSpot.Application.Dto;
+using ByteSpot.Application.Queries;
+using ByteSpot.Infrastructure.DAL.Database;
+using Microsoft.EntityFrameworkCore;
+
+namespace ByteSpot.Infrastructure.DAL.Handlers;
+
+internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
+    : IQueryHandler<GetOffersQuery, PagedResult<OfferDto>>
+{
+    public async Task<PagedResult<OfferDto>> HandleAsync(GetOffersQuery query)
+    {
+        var offers = dbContext.Offers.AsNoTracking().AsQueryable();
+
+        if (query.SalaryMin is not null)
+        {
+            offers = offers.Where(offer =>
+                offer.Salary.Min >= query.SalaryMin || offer.Salary.Fixed >= query.SalaryMin);
+        }
+
+        if (query.SalaryMax is not null)
+        {
+            offers = offers.Where(offer =>
+                offer.Salary.Max <= query.SalaryMax || offer.Salary.Fixed <= query.SalaryMax);
+        }
+
+        if (query.LocationIds is not null && query.LocationIds.Any())
+        {
+            offers = offers.Where(offer => offer.Locations.Any(location => query.LocationIds.Contains(location.Id)));
+        }
+
+        if (query.TechnologyIds is not null && query.TechnologyIds.Any())
+        {
+            offers = offers.Where(offer =>
+                offer.Technologies.Any(technology => query.TechnologyIds.Contains(technology.Id)));
+        }
+
+        if (query.WorkModeIds is not null && query.WorkModeIds.Any())
+        {
+            offers = offers.Where(offer => offer.WorkModes.Any(workMode => query.WorkModeIds.Contains(workMode.Id)));
+        }
+
+        if (query.ExperienceLevelIds is not null && query.ExperienceLevelIds.Any())
+        {
+            offers = offers.Where(offer =>
+                offer.ExperienceLevels.Any(experienceLevel => query.ExperienceLevelIds.Contains(experienceLevel.Id)));
+        }
+
+        if (query.EmploymentTypeIds is not null && query.LocationIds is not null && query.EmploymentTypeIds.Any())
+        {
+            offers = offers.Where(offer =>
+                offer.EmploymentTypes.Any(employmentType => query.EmploymentTypeIds.Contains(employmentType.Id)));
+        }
+
+        offers = query.SortBy switch
+        {
+            OfferSort.Latest => query.IsDescending
+                ? offers.OrderByDescending(offer => offer.CreatedAt).ThenByDescending(offer => offer.Id)
+                : offers.OrderBy(offer => offer.CreatedAt).ThenBy(offer => offer.Id),
+            OfferSort.HighestSalary => query.IsDescending
+                ? offers.OrderByDescending(offer => offer.Salary.Max ?? offer.Salary.Fixed).ThenByDescending(offer => offer.Id)
+                : offers.OrderBy(offer => offer.Salary.Max ?? offer.Salary.Fixed).ThenBy(offer => offer.Id),
+            OfferSort.LowestSalary => query.IsDescending
+                ? offers.OrderByDescending(offer => offer.Salary.Min ?? offer.Salary.Fixed).ThenByDescending(offer => offer.Id)
+                : offers.OrderBy(offer => offer.Salary.Min ?? offer.Salary.Fixed).ThenBy(offer => offer.Id),
+            _ => query.IsDescending
+                ? offers.OrderByDescending(offer => offer.Title)
+                : offers.OrderBy(offer => offer.Title)
+        };
+
+        var total = await offers.CountAsync();
+        var items = await offers
+            .Skip((query.PageNumber - 1) * query.PageSize)
+            .Take(query.PageSize)
+            .Select(offer =>
+                new OfferDto(
+                    offer.Id,
+                    offer.Title,
+                    offer.Company.Name,
+                    offer.Salary.Min,
+                    offer.Salary.Max,
+                    offer.Salary.Fixed,
+                    offer.Locations.Select(l => l.Name.Value).ToList(),
+                    offer.Technologies.Select(t => t.Name.Value).ToList()
+                )
+            ).ToListAsync();
+
+        return new PagedResult<OfferDto>(
+            Items: items,
+            PageNumber: query.PageNumber,
+            PageSize: query.PageSize,
+            TotalCount: total
+        );
+    }
+}
