@@ -3,6 +3,7 @@ using System;
 using ByteSpot.Infrastructure.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ByteSpot.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(ByteSpotDbContext))]
-    partial class ByteSpotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260302173120_AddCreatedAtToOffer")]
+    partial class AddCreatedAtToOffer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

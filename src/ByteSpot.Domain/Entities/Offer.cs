@@ -10,6 +10,7 @@ public class Offer
     public Identifier CompanyId { get; private set; }
     public Company Company { get; private set; }
     public Salary Salary { get; private set; }
+    public DateTimeOffset CreatedAt { get; private set; }
     public ICollection<Location> Locations { get; private set; } = new List<Location>();
     public ICollection<Technology> Technologies { get; private set; } = new List<Technology>();
     public ICollection<WorkMode> WorkModes { get; private set; } = new List<WorkMode>();
@@ -18,16 +19,17 @@ public class Offer
     
     private Offer() {}
     
-    private Offer(Identifier id, Title title, Salary salary, Identifier companyId)
+    private Offer(Identifier id, Title title, Salary salary, Identifier companyId, DateTimeOffset createdAt)
     {
         Id = id;
         Title = title;
         CompanyId = companyId;
         Salary = salary;
+        CreatedAt = createdAt;
     }
 
-    public static Offer Create(Identifier id, Title title, Salary salary, Identifier companyId)
-        => new(id, title, salary, companyId);
+    public static Offer Create(Identifier id, Title title, Salary salary, Identifier companyId, DateTimeOffset createdAt)
+        => new(id, title, salary, companyId, createdAt);
 
     public void AddLocation(Location location)
     {
