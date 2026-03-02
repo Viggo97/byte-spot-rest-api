@@ -1,8 +1,6 @@
-﻿using ByteSpot.Application.Abstractions;
-using ByteSpot.Domain.Repositories;
+﻿using ByteSpot.Domain.Repositories;
 using ByteSpot.Infrastructure.Abstractions;
 using ByteSpot.Infrastructure.DAL.Database;
-using ByteSpot.Infrastructure.DAL.Decorators;
 using ByteSpot.Infrastructure.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,10 +28,6 @@ internal static class Extensions
             .AddScoped<IWorkModeRepository, PostgresWorkModeRepository>()
             .AddScoped<IExperienceLevelRepository, PostgresExperienceLevelRepository>()
             .AddScoped<IEmploymentTypeRepository, PostgresEmploymentTypeRepository>();
-
-        // TODO uncomment while commands implementation
-        // services
-        //     .Decorate(typeof(ICommandHandler<>), typeof(CommandHandlerUnitOfWorkDecorator<>));
         
         return services;
     }

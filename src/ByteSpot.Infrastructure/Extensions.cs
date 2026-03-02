@@ -1,4 +1,6 @@
-﻿using ByteSpot.Infrastructure.DAL;
+﻿using ByteSpot.Application.Abstractions;
+using ByteSpot.Infrastructure.Abstractions;
+using ByteSpot.Infrastructure.DAL;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +11,19 @@ public static class Extensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres(configuration);
+        
+        // TODO uncomment while commands implementation
+        // services
+        //     .Decorate(typeof(ICommandHandler<>), typeof(CommandHandlerUnitOfWorkDecorator<>));
+        
+        var infrastructureAssembly = typeof(IUnitOfWork).Assembly;
+        services
+            .Scan(source =>
+                source.FromAssemblies(infrastructureAssembly)
+                    .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)), false)
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
+            );
         
         return services;
     }
