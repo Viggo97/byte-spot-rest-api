@@ -1,0 +1,16 @@
+﻿﻿services:
+
+  db:
+    image: postgres
+    container_name: byte-spot-rest-api
+    shm_size: 256mb
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - byte-spot-rest-api:/var/lib/postgresql
+    ports:
+      - 5432:5432
+
+volumes:
+  byte-spot-rest-api:
+    driver: local
