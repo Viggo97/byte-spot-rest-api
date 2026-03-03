@@ -13,6 +13,7 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
     public async Task<PagedResult<OfferDto>> HandleAsync(GetOffersQuery query)
     {
         var offers = dbContext.Offers.AsNoTracking().AsQueryable();
+        var searchPhrase = query.SearchPhrase?.ToLower();
 
         if (query.SalaryMin is not null)
         {
@@ -48,10 +49,18 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
                 offer.ExperienceLevels.Any(experienceLevel => query.ExperienceLevelIds.Contains(experienceLevel.Id)));
         }
 
-        if (query.EmploymentTypeIds is not null && query.LocationIds is not null && query.EmploymentTypeIds.Any())
+        if (query.EmploymentTypeIds is not null && query.EmploymentTypeIds.Any())
         {
             offers = offers.Where(offer =>
                 offer.EmploymentTypes.Any(employmentType => query.EmploymentTypeIds.Contains(employmentType.Id)));
+        }
+        
+        if (searchPhrase is not null)
+        {
+            offers = offers.Where(offer => ((string)offer.Title).ToLower().Contains(searchPhrase)
+                                           || offer.Locations.Any(location => ((string)location.Name).ToLower().Contains(searchPhrase))
+                                           || offer.Technologies.Any(technology => ((string)technology.Name).ToLower().Contains(searchPhrase))
+                                           || ((string)offer.Company.Name).ToLower().Contains(searchPhrase));
         }
 
         offers = query.SortBy switch

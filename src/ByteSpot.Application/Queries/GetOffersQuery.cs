@@ -9,6 +9,7 @@ public sealed record GetOffersQuery(
     int PageSize,
     OfferSort SortBy,
     bool IsDescending,
+    string? SearchPhrase,
     int? SalaryMin,
     int? SalaryMax,
     IEnumerable<Guid>? LocationIds,
