@@ -65,18 +65,10 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
 
         offers = query.SortBy switch
         {
-            OfferSort.Latest => query.IsDescending
-                ? offers.OrderByDescending(offer => offer.CreatedAt).ThenByDescending(offer => offer.Id)
-                : offers.OrderBy(offer => offer.CreatedAt).ThenBy(offer => offer.Id),
-            OfferSort.HighestSalary => query.IsDescending
-                ? offers.OrderByDescending(offer => offer.Salary.Max ?? offer.Salary.Fixed).ThenByDescending(offer => offer.Id)
-                : offers.OrderBy(offer => offer.Salary.Max ?? offer.Salary.Fixed).ThenBy(offer => offer.Id),
-            OfferSort.LowestSalary => query.IsDescending
-                ? offers.OrderByDescending(offer => offer.Salary.Min ?? offer.Salary.Fixed).ThenByDescending(offer => offer.Id)
-                : offers.OrderBy(offer => offer.Salary.Min ?? offer.Salary.Fixed).ThenBy(offer => offer.Id),
-            _ => query.IsDescending
-                ? offers.OrderByDescending(offer => offer.Title)
-                : offers.OrderBy(offer => offer.Title)
+            OfferSort.Latest => offers.OrderByDescending(offer => offer.CreatedAt).ThenByDescending(offer => offer.Id),
+            OfferSort.HighestSalary => offers.OrderByDescending(offer => offer.Salary.Max ?? offer.Salary.Fixed).ThenByDescending(offer => offer.Id),
+            OfferSort.LowestSalary => offers.OrderBy(offer => offer.Salary.Min ?? offer.Salary.Fixed).ThenBy(offer => offer.Id),
+            _ => offers.OrderBy(offer => offer.Title)
         };
 
         var total = await offers.CountAsync();
