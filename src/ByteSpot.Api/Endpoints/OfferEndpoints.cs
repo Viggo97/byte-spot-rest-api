@@ -25,8 +25,7 @@ public static class OfferEndpoints
             [FromQuery(Name = "locationId")] Guid[]? locationIds,
             [FromQuery(Name = "technologyId")] Guid[]? technologyIds,
             [FromQuery(Name = "workModeId")] int[]? workModeIds,
-            [FromQuery(Name = "experienceLevelId")]
-            int[]? experienceLevelIds,
+            [FromQuery(Name = "experienceLevelId")] int[]? experienceLevelIds,
             [FromQuery(Name = "employmentTypeId")] int[]? employmentTypeIds) =>
         {
             var offers = await handler.HandleAsync(new GetOffersQuery(

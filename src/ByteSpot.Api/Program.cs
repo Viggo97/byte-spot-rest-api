@@ -1,3 +1,5 @@
+using ByteSpot.Api;
+using ByteSpot.Api.Cors;
 using ByteSpot.Api.Endpoints;
 using ByteSpot.Application;
 using ByteSpot.Domain;
@@ -10,6 +12,7 @@ builder.Services
     .AddDomain()
     .AddApplication()
     .AddInfrastructure(builder.Configuration)
+    .AddApi(builder.Configuration)
     .AddOpenApi();
 
 var app = builder.Build();
@@ -20,7 +23,9 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference(options => { options.WithTitle("Byte Spot Api"); });
 }
 
-app.UseHttpsRedirection();
+app
+    .UseHttpsRedirection()
+    .UseCors(CorsConfiguration.CorsPolicy);
 
 app
     .MapOfferEndpoints()
