@@ -1,7 +1,7 @@
-﻿using ByteSpot.Application.Abstractions;
+﻿using ByteSpot.Api.Utils;
+using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
-using ByteSpot.Domain.Enums;
 
 namespace ByteSpot.Api.Endpoints;
 
@@ -13,9 +13,8 @@ public static class WorkModeEndpoints
     {
         app.MapGet(Route, async (IQueryHandler<GetWorkModesQuery, IEnumerable<WorkModeDto>> handler, HttpContext httpContext) =>
         {
-            var acceptLanguageHeader = httpContext.Request.Headers.AcceptLanguage;
-            var languageParsed = Enum.TryParse(acceptLanguageHeader, out LanguageCode languageCode);
-            var query = new GetWorkModesQuery(languageParsed ? languageCode : LanguageCode.En);
+            var languageCode = LanguageCodeConverter.Get(httpContext);
+            var query = new GetWorkModesQuery(languageCode);
             var workModes = await handler.HandleAsync(query);
             return Results.Ok(workModes);
         });
