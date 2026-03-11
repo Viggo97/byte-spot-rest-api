@@ -1,4 +1,5 @@
-﻿using ByteSpot.Application.Abstractions;
+﻿using ByteSpot.Api.Utils;
+using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
 
@@ -10,9 +11,12 @@ public static class ExperienceLevelEndpoints
     
     public static WebApplication MapExperienceLevelEndpoints(this WebApplication app)
     {
-        app.MapGet(Route, async (IQueryHandler<GetExperienceLevelsQuery, IEnumerable<ExperienceLevelDto>> handler) =>
+        app.MapGet(Route, async (IQueryHandler<GetExperienceLevelsQuery, IEnumerable<ExperienceLevelDto>> handler,
+            HttpContext httpContext) =>
         {
-            var experienceLevels = await handler.HandleAsync(new GetExperienceLevelsQuery());
+            var languageCode = LanguageCodeConverter.Get(httpContext);
+            var query = new GetExperienceLevelsQuery(languageCode);
+            var experienceLevels = await handler.HandleAsync(query);
             return Results.Ok(experienceLevels);
         });
         

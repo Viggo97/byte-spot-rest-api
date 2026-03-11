@@ -10,8 +10,7 @@ internal sealed class ExperienceLevelConfiguration : IEntityTypeConfiguration<Ex
     public void Configure(EntityTypeBuilder<ExperienceLevel> builder)
     {
         builder
-            .Property(experienceLevel => experienceLevel.Name)
-            .HasMaxLength(128)
-            .HasConversion(name => name.Value, value => new Name(value));
+            .Property(experienceLevel => experienceLevel.Value)
+            .HasMaxLength(128);
     }
 }
