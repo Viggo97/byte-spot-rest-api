@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ByteSpot.Infrastructure.DAL.Configurations;
 
-internal sealed class WorkModeTranslationConfiguration : IEntityTypeConfiguration<WorkModeTranslation>
+public class EmploymentTypeTranslationConfiguration : IEntityTypeConfiguration<EmploymentTypeTranslation>
 {
-    public void Configure(EntityTypeBuilder<WorkModeTranslation> builder)
+    public void Configure(EntityTypeBuilder<EmploymentTypeTranslation> builder)
     {
         builder
-            .HasKey(translation => new { translation.WorkModeId, translation.LanguageCode });
+            .HasKey(translation => new { translation.EmploymentTypeId, translation.LanguageCode });
         
         builder
             .Property(translation => translation.Id)
