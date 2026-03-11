@@ -71,7 +71,6 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
             _ => offers.OrderBy(offer => offer.Title)
         };
 
-        var total = await offers.CountAsync();
         var items = await offers
             .Skip((query.PageNumber - 1) * query.PageSize)
             .Take(query.PageSize)
@@ -92,7 +91,7 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
             Items: items,
             PageNumber: query.PageNumber,
             PageSize: query.PageSize,
-            TotalCount: total
+            TotalCount: items.Count
         );
     }
 }
