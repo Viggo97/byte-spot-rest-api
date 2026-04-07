@@ -10,6 +10,7 @@ internal sealed class ByteSpotDbContext(DbContextOptions<ByteSpotDbContext> cont
 {
     public DbSet<Offer> Offers => Set<Offer>();
     public DbSet<Company> Companies => Set<Company>();
+    public DbSet<Salary> Salaries => Set<Salary>();
     public DbSet<Location> Locations => Set<Location>();
     public DbSet<Technology> Technologies => Set<Technology>();
     public DbSet<WorkMode> WorkModes => Set<WorkMode>();

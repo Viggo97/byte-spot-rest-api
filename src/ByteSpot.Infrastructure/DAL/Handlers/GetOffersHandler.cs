@@ -2,6 +2,7 @@
 using ByteSpot.Application.Common;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
+using ByteSpot.Domain.Entities;
 using ByteSpot.Infrastructure.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,19 +13,22 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
 {
     public async Task<PagedResult<OfferDto>> HandleAsync(GetOffersQuery query)
     {
-        var offers = dbContext.Offers.AsNoTracking().AsQueryable();
+        var offers = dbContext.Offers
+            .Include(offer => offer.Salaries)
+            .AsNoTracking()
+            .AsQueryable();
         var searchPhrase = query.SearchPhrase?.ToLower();
 
         if (query.SalaryMin is not null)
         {
             offers = offers.Where(offer =>
-                offer.Salary.Min >= query.SalaryMin || offer.Salary.Fixed >= query.SalaryMin);
+                offer.Salaries.Any() && offer.Salaries.Min(s => s.Min ?? s.Fixed) >= query.SalaryMin);
         }
 
         if (query.SalaryMax is not null)
         {
             offers = offers.Where(offer =>
-                offer.Salary.Max <= query.SalaryMax || offer.Salary.Fixed <= query.SalaryMax);
+                offer.Salaries.Any() && offer.Salaries.Max(s => s.Max ?? s.Fixed) <= query.SalaryMax);
         }
 
         if (query.LocationIds is not null && query.LocationIds.Any())
@@ -66,25 +70,22 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
         offers = query.SortBy switch
         {
             OfferSort.Latest => offers.OrderByDescending(offer => offer.CreatedAt).ThenByDescending(offer => offer.Id),
-            OfferSort.HighestSalary => offers.OrderByDescending(offer => offer.Salary.Max ?? offer.Salary.Fixed).ThenByDescending(offer => offer.Id),
-            OfferSort.LowestSalary => offers.OrderBy(offer => offer.Salary.Min ?? offer.Salary.Fixed).ThenBy(offer => offer.Id),
+            OfferSort.HighestSalary => offers.OrderByDescending(offer => offer.Salaries.Max(s => s.Max ?? s.Fixed)).ThenByDescending(offer => offer.Id),
+            OfferSort.LowestSalary => offers.OrderBy(offer => offer.Salaries.Min(s => s.Min ?? s.Fixed)).ThenBy(offer => offer.Id),
             _ => offers.OrderBy(offer => offer.Title)
         };
 
         var items = await offers
             .Skip((query.PageNumber - 1) * query.PageSize)
             .Take(query.PageSize)
-            .Select(offer =>
-                new OfferDto(
-                    offer.Id,
-                    offer.Title,
-                    offer.Company.Name,
-                    offer.Salary.Min,
-                    offer.Salary.Max,
-                    offer.Salary.Fixed,
-                    offer.Locations.Select(l => l.Name.Value).ToList(),
-                    offer.Technologies.Select(t => t.Name.Value).ToList()
-                )
+            .Select(offer => new OfferDto(
+                        offer.Id,
+                        offer.Title,
+                        offer.Company.Name,
+                        offer.Salaries.Select(s => new SalaryDto(s.Min, s.Max, s.Fixed)).ToList(),
+                        offer.Locations.Select(l => l.Name.Value).ToList(),
+                        offer.Technologies.Select(t => t.Name.Value).ToList()
+                    )
             ).ToListAsync();
 
         return new PagedResult<OfferDto>(

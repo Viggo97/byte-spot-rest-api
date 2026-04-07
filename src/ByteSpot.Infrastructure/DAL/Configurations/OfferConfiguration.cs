@@ -20,12 +20,8 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
             .HasConversion(title => title.Value, value => new Title(value));
 
         builder
-            .OwnsOne(offer => offer.Salary, salary =>
-            {
-                salary.Property(s => s.Min).HasColumnName("MinSalary");
-                salary.Property(s => s.Max).HasColumnName("MaxSalary");
-                salary.Property(s => s.Fixed).HasColumnName("FixedSalary");
-            });
+            .HasMany(offer => offer.Salaries)
+            .WithOne(salary => salary.Offer);
 
         builder
             .Property(offer => offer.CompanyId)

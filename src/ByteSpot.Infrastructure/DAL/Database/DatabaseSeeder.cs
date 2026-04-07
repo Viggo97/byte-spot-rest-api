@@ -22,6 +22,7 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
         await AddEmploymentTypes();
         await AddEmploymentTypeTranslations();
         await AddOffers();
+        await AddSalaries();
     }
 
     private async Task AddOffers()
@@ -40,7 +41,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("cd11aea2-9a6c-4462-b16b-570d75247129"),
                     "JavaScript Developer",
-                    new Salary(12_000, 18_000),
                     companies[0].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 1, 0, TimeSpan.Zero),
                     ["Warszawa", "Bydgoszcz"],
@@ -53,7 +53,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("df08859f-df88-45bb-b59a-cd856e578f16"),
                     "Java Developer",
-                    new Salary(13_000, 16_000),
                     companies[1].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 2, 0, TimeSpan.Zero),
                     ["Wrocław"],
@@ -66,7 +65,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("8cae5d4f-eb4a-4a15-b504-6ee321ee1534"),
                     "Senior C# Developer",
-                    new Salary(18_500),
                     companies[2].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 3, 0, TimeSpan.Zero),
                     ["Kraków", "Wrocław", "Warszawa", "Poznań", "Gdańsk", "Katowice", "Łódź"],
@@ -79,7 +77,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("db657ff0-115b-484b-b19a-51704e8dbc93"),
                     "Junior Go Developer",
-                    new Salary(12_000),
                     companies[3].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 4, 0, TimeSpan.Zero),
                     ["Kraków"],
@@ -92,7 +89,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("f46fc3a8-be21-4451-91e4-45015f71e4df"),
                     "Python Developer",
-                    new Salary(13_500, 19_000),
                     companies[4].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 5, 0, TimeSpan.Zero),
                     ["Toruń", "Poznań"],
@@ -105,7 +101,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("87ab8cad-f4a7-4e7e-a174-b8618c93ecf5"),
                     "Senior Java Developer",
-                    new Salary(14_500, 17_500),
                     companies[5].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 6, 0, TimeSpan.Zero),
                     ["Kraków", "Katowice", "Gliwice"],
@@ -118,7 +113,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("44c4509c-d56f-422c-b601-35d5c69283e7"),
                     "TypeScript Developer",
-                    new Salary(15_000),
                     companies[6].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 7, 0, TimeSpan.Zero),
                     ["Białystok"],
@@ -131,7 +125,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("6a37b912-d8f6-488c-aa6d-c1c7a5bd3026"),
                     "Senior JavaScript Developer",
-                    new Salary(15_500, 17_500),
                     companies[0].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 8, 0, TimeSpan.Zero),
                     ["Warszawa", "Kraków"],
@@ -144,7 +137,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("923c67af-ec64-4d20-a0b7-ba423d2faee5"),
                     "Senior C# Developer",
-                    new Salary(15_000, 19_000),
                     companies[1].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 9, 0, TimeSpan.Zero),
                     ["Zeilona Góra", "Gorzów Wielkopolski"],
@@ -157,7 +149,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("9db0fdfd-d032-4b78-b850-75c7d90a8468"),
                     "Lead Python Developer",
-                    new Salary(19_000, 24_000),
                     companies[2].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 10, 0, TimeSpan.Zero),
                     ["Bydgoszcz", "Toruń", "Szczecin"],
@@ -170,7 +161,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("34744eb2-da49-4314-a49d-a42b9f0efbea"),
                     "Junior C# Developer",
-                    new Salary(10_000, 11_500),
                     companies[3].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 11, 0, TimeSpan.Zero),
                     ["Kielce", "Łódź"],
@@ -183,7 +173,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("f6f910b8-6667-425d-95e9-74810ff62b6e"),
                     "Fullstack Developer",
-                    new Salary(14_000, 18_500),
                     companies[4].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 12, 0, TimeSpan.Zero),
                     ["Gorzów Wielkopolski", "Zielona Góra"],
@@ -196,7 +185,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("1a5a4855-247d-49c6-9b43-b488317881ca"),
                     "Senior Rust Developer",
-                    new Salary(20_000, 25_000),
                     companies[5].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 13, 0, TimeSpan.Zero),
                     ["Wrocław"],
@@ -209,7 +197,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("89ea7c6e-e49a-48d5-8439-03e21263b66e"),
                     "Mobile Developer",
-                    new Salary(11_000, 17_000),
                     companies[6].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 14, 0, TimeSpan.Zero),
                     ["Rzeszów", "Lublin"],
@@ -222,7 +209,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("ed31f986-09c2-4c9e-95ab-ea43e43e16e9"),
                     "Senior C/C++ Developer",
-                    new Salary(16_000, 22_000),
                     companies[0].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 15, 0, TimeSpan.Zero),
                     ["Gdańsk", "Gdynia", "Sopot"],
@@ -235,7 +221,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("76dbce69-81ad-4ccb-befa-2707d94e25b5"),
                     "Junior JavaScript Developer",
-                    new Salary(10_000),
                     companies[1].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 16, 0, TimeSpan.Zero),
                     ["Warszawa", "Kraków", "Wrocław", "Łódź", "Poznań", "Lublin"],
@@ -248,7 +233,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("0e278e45-3b6c-42b9-90ce-e902034cbf18"),
                     "Rust Developer",
-                    new Salary(14_000, 19_000),
                     companies[2].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 17, 0, TimeSpan.Zero),
                     ["Warszawa", "Kraków"],
@@ -261,7 +245,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("c74f934f-50e2-4655-9a37-2281cfddb043"),
                     "Senior Fullstack Developer",
-                    new Salary(17_000, 22_000),
                     companies[3].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 18, 0, TimeSpan.Zero),
                     ["Katowice", "Gliwice"],
@@ -274,7 +257,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("7ee41092-960f-4b93-8a8d-27fb32e30855"),
                     "Junior C# Developer",
-                    new Salary(7_000, 10_000),
                     companies[4].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 19, 0, TimeSpan.Zero),
                     ["Kraków", "Wrocław"],
@@ -287,7 +269,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 CreateOffer(
                     new Identifier("d36d28ac-1ec1-4e4a-bc31-1d353a3db78e"),
                     "Junior Python Developer",
-                    new Salary(8_000, 11_000),
                     companies[5].Id,
                     new DateTimeOffset(2026, 03, 02, 18, 20, 0, TimeSpan.Zero),
                     ["Warszawa", "Gdańsk"],
@@ -319,6 +300,27 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
                 Company.Create(new Identifier("f371e4a6-016e-4d30-bbd9-08eef2e3dcc1"), "Oracle"),
             };
             await dbContext.Companies.AddRangeAsync(companies);
+            await dbContext.SaveChangesAsync();
+        }
+    }
+    
+    private async Task AddSalaries()
+    {
+        if (!dbContext.Salaries.Any())
+        {
+            var salaries = new List<Salary>()
+            {
+                Salary.Create(
+                    new Identifier("cfdc385e-6ce6-41df-9b9e-1538450c824c"),
+                        new Identifier("cd11aea2-9a6c-4462-b16b-570d75247129"),
+                    1,
+                    10_000,
+                    15_000,
+                    null,
+                    new Currency("PLN")
+                    )
+            };
+            await dbContext.Salaries.AddRangeAsync(salaries);
             await dbContext.SaveChangesAsync();
         }
     }
@@ -527,7 +529,7 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
         }
     }
 
-    private static Offer CreateOffer(Identifier id, Title title, Salary salary, Identifier companyId, DateTimeOffset createdAt,
+    private static Offer CreateOffer(Identifier id, Title title, Identifier companyId, DateTimeOffset createdAt,
         string[] locationNames, string[] technologyNames, string[] workModesNames, string[] experienceLevelsNames,
         string[] employmentTypeNames, List<Location> locations, List<Technology> technologies, List<WorkMode> workModes,
         List<ExperienceLevel> experienceLevels, List<EmploymentType> employmentTypes)
@@ -535,7 +537,6 @@ internal sealed class DatabaseSeeder(ByteSpotDbContext dbContext)
         var offer = Offer.Create(
             id,
             title,
-            salary,
             companyId,
             createdAt
         );
