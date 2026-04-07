@@ -22,5 +22,13 @@ public class SalaryConfiguration :  IEntityTypeConfiguration<Salary>
             .Property(salary => salary.Currency)
             .HasMaxLength(3)
             .HasConversion(currency => currency.Code, code => new Currency(code));
+
+        builder
+            .Property(salary => salary.Type)
+            .HasConversion<string>();
+        
+        builder
+            .Property(salary => salary.BillingUnit)
+            .HasConversion<string>();
     }
 }
