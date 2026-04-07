@@ -8,7 +8,7 @@ public class Offer
     public Identifier Id { get; private set; }
     public Title Title { get; private set; }
     public Identifier CompanyId { get; private set; }
-    public Company Company { get; private set; }
+    public Company Company { get; private set; } = default!;
     public DateTimeOffset CreatedAt { get; private set; }
     public ICollection<Salary> Salaries { get; private set; } = new List<Salary>();
     public ICollection<Location> Locations { get; private set; } = new List<Location>();
