@@ -1,5 +1,4 @@
 ﻿using ByteSpot.Domain.Entities.Translations;
-using ByteSpot.Domain.ValueObjects.Shared;
 
 namespace ByteSpot.Domain.Entities;
 
