@@ -72,6 +72,8 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
             OfferSort.LowestSalary => offers.OrderBy(offer => offer.SalaryMinComputed).ThenByDescending(offer => offer.CreatedAt).ThenBy(offer => offer.Id),
             _ => offers.OrderBy(offer => offer.Title)
         };
+        
+        var totalCount = await offers.CountAsync();
 
         var items = await offers
             .Skip((query.PageNumber - 1) * query.PageSize)
@@ -85,9 +87,7 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
                         offer.Technologies.Select(t => t.Name.Value).ToList()
                     )
             ).ToListAsync();
-
-        var totalCount = await dbContext.Offers.CountAsync();
-
+        
         return new PagedResult<OfferDto>(
             Items: items,
             PageNumber: query.PageNumber,
