@@ -15,11 +15,11 @@ public class Salary
     public int? Min { get; private set; }
     public int? Max { get; private set; }
     public int? Fixed { get; private set; }
-    public Currency Currency { get; private set; }
+    public CurrencyCode CurrencyCode { get; private set; }
     public BillingUnit BillingUnit { get; private set; }
 
     private Salary(Identifier id, Identifier offerId, int employmentTypeId, SalaryType type, int? min, int? max, int? @fixed,
-        Currency currency, BillingUnit billingUnit)
+        CurrencyCode currencyCode, BillingUnit billingUnit)
     {
         Id = id;
         OfferId = offerId;
@@ -28,11 +28,11 @@ public class Salary
         Min = min;
         Max = max;
         Fixed = @fixed;
-        Currency = currency;
+        CurrencyCode = currencyCode;
         BillingUnit = billingUnit;
     }
 
     public static Salary Create(Identifier id, Identifier offerId, int employmentTypeId, SalaryType type, int? min, int? max, int? @fixed,
-        Currency currency, BillingUnit billingUnit) 
-        => new (id, offerId, employmentTypeId, type,  min,  max, @fixed, currency, billingUnit);
+        CurrencyCode currencyCode, BillingUnit billingUnit) 
+        => new (id, offerId, employmentTypeId, type,  min,  max, @fixed, currencyCode, billingUnit);
 }

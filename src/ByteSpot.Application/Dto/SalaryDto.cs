@@ -1,6 +1,13 @@
-﻿namespace ByteSpot.Application.Dto;
+﻿using ByteSpot.Domain.Entities;
+using ByteSpot.Domain.Enums;
+
+namespace ByteSpot.Application.Dto;
 
 public sealed record SalaryDto(    
-    int? SalaryMin,
-    int? SalaryMax,
-    int? SalaryFixed);
+    int? Min,
+    int? Max,
+    int? Fixed,
+    SalaryType Type,
+    CurrencyCode CurrencyCode,
+    BillingUnit BillingUnit,
+    EmploymentType EmploymentType);

@@ -17,11 +17,10 @@ public class SalaryConfiguration :  IEntityTypeConfiguration<Salary>
         builder
             .Property(salary => salary.OfferId)
             .HasConversion(id => id.Value, value => new Identifier(value));
-
+        
         builder
-            .Property(salary => salary.Currency)
-            .HasMaxLength(3)
-            .HasConversion(currency => currency.Code, code => new Currency(code));
+            .Property(salary => salary.CurrencyCode)
+            .HasConversion<string>();
 
         builder
             .Property(salary => salary.Type)

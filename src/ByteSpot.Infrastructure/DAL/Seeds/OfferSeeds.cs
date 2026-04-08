@@ -48,13 +48,16 @@ class OfferSeeds
 
     private IReadOnlyCollection<Offer> InitOffers()
     {
+        var now = DateTime.UtcNow;
+        
         List<Offer> offers =
         [
             CreateOffer(
                 new Identifier("cd11aea2-9a6c-4462-b16b-570d75247129"),
                 "JavaScript Developer",
                 _companies.ElementAt(0).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 1, 0, TimeSpan.Zero),
+                now.AddMinutes(1),
+                now.AddDays(30).AddMinutes(1),
                 ["Warszawa", "Bydgoszcz"],
                 ["JavaScript", "TypeScript"],
                 ["Remote", "Hybrid"],
@@ -69,7 +72,7 @@ class OfferSeeds
                         11_000,
                         16_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -80,7 +83,7 @@ class OfferSeeds
                         12_000,
                         18_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -89,7 +92,8 @@ class OfferSeeds
                 new Identifier("df08859f-df88-45bb-b59a-cd856e578f16"),
                 "Java Developer",
                 _companies.ElementAt(1).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 2, 0, TimeSpan.Zero),
+                now.AddMinutes(2),
+                now.AddDays(30).AddMinutes(2),
                 ["Wrocław"],
                 ["Java", "Mobile"],
                 ["Hybrid", "OnSite"],
@@ -101,22 +105,22 @@ class OfferSeeds
                         new Identifier("cd11aea2-9a6c-4462-b16b-570d75247129"),
                         1,
                         SalaryType.NET,
-                        13_000,
-                        16_000,
+                        90,
+                        100,
                         null,
-                        new Currency("PLN"),
-                        BillingUnit.MONTH
+                        CurrencyCode.PLN,
+                        BillingUnit.HOUR
                     ),
                     Salary.Create(
                         new Identifier("9c48f843-7079-4735-b75d-4b0aed4e8295"),
                         new Identifier("cd11aea2-9a6c-4462-b16b-570d75247129"),
                         3,
                         SalaryType.GROSS,
-                        12_000,
-                        15_000,
+                        80,
+                        90,
                         null,
-                        new Currency("PLN"),
-                        BillingUnit.MONTH
+                        CurrencyCode.PLN,
+                        BillingUnit.HOUR
                     ),
                 ]
             ),
@@ -124,7 +128,8 @@ class OfferSeeds
                 new Identifier("8cae5d4f-eb4a-4a15-b504-6ee321ee1534"),
                 "Senior C# Developer",
                 _companies.ElementAt(2).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 3, 0, TimeSpan.Zero),
+                now.AddMinutes(3),
+                now.AddDays(30).AddMinutes(3),
                 ["Kraków", "Wrocław", "Warszawa", "Poznań", "Gdańsk", "Katowice", "Łódź"],
                 ["C#", "SQL", "Azure"],
                 ["Remote"],
@@ -138,8 +143,8 @@ class OfferSeeds
                         SalaryType.NET,
                         null,
                         null,
-                        18_000,
-                        new Currency("PLN"),
+                        8_000,
+                        CurrencyCode.USD,
                         BillingUnit.MONTH   
                     ),
                 ]
@@ -148,7 +153,8 @@ class OfferSeeds
                 new Identifier("db657ff0-115b-484b-b19a-51704e8dbc93"),
                 "Junior Go Developer",
                 _companies.ElementAt(3).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 4, 0, TimeSpan.Zero),
+                now.AddMinutes(4),
+                now.AddDays(30).AddMinutes(4),
                 ["Kraków"],
                 ["Go", "Python"],
                 ["OnSite"],
@@ -163,7 +169,7 @@ class OfferSeeds
                         8_000,
                         10_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -174,7 +180,7 @@ class OfferSeeds
                         8_500,
                         10_500,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -185,7 +191,7 @@ class OfferSeeds
                         8_000,
                         10_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -194,7 +200,8 @@ class OfferSeeds
                 new Identifier("f46fc3a8-be21-4451-91e4-45015f71e4df"),
                 "Python Developer",
                 _companies.ElementAt(4).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 5, 0, TimeSpan.Zero),
+                now.AddMinutes(5),
+                now.AddDays(30).AddMinutes(5),
                 ["Toruń", "Poznań"],
                 ["SQL", "Python"],
                 ["Hybrid"],
@@ -209,7 +216,7 @@ class OfferSeeds
                         15_000,
                         18_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -218,7 +225,8 @@ class OfferSeeds
                 new Identifier("87ab8cad-f4a7-4e7e-a174-b8618c93ecf5"),
                 "Senior Java Developer",
                 _companies.ElementAt(5).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 6, 0, TimeSpan.Zero),
+                now.AddMinutes(6),
+                now.AddDays(30).AddMinutes(6),
                 ["Kraków", "Katowice", "Gliwice"],
                 ["AWS", "Java"],
                 ["Remote", "Hybrid"],
@@ -230,22 +238,22 @@ class OfferSeeds
                         new Identifier("87ab8cad-f4a7-4e7e-a174-b8618c93ecf5"),
                         2,
                         SalaryType.NET,
-                        18_000,
-                        19_000,
+                        210,
+                        215,
                         null,
-                        new Currency("PLN"),
-                        BillingUnit.MONTH
+                        CurrencyCode.EUR,
+                        BillingUnit.DAY
                     ),
                     Salary.Create(
                         new Identifier("75c3d8bd-0f97-41f1-acc6-033137e6a659"),
                         new Identifier("87ab8cad-f4a7-4e7e-a174-b8618c93ecf5"),
                         4,
                         SalaryType.NET,
-                        16_500,
-                        17_500,
+                        200,
+                        205,
                         null,
-                        new Currency("PLN"),
-                        BillingUnit.MONTH
+                        CurrencyCode.EUR,
+                        BillingUnit.DAY
                     ),
                 ]
             ),
@@ -253,7 +261,8 @@ class OfferSeeds
                 new Identifier("44c4509c-d56f-422c-b601-35d5c69283e7"),
                 "TypeScript Developer",
                 _companies.ElementAt(6).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 7, 0, TimeSpan.Zero),
+                now.AddMinutes(7),
+                now.AddDays(30).AddMinutes(7),
                 ["Białystok"],
                 ["TypeScript", "Python"],
                 ["Remote"],
@@ -268,7 +277,7 @@ class OfferSeeds
                         12_000,
                         15_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -277,7 +286,8 @@ class OfferSeeds
                 new Identifier("6a37b912-d8f6-488c-aa6d-c1c7a5bd3026"),
                 "Senior JavaScript Developer",
                 _companies.ElementAt(0).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 8, 0, TimeSpan.Zero),
+                now.AddMinutes(8),
+                now.AddDays(30).AddMinutes(8),
                 ["Warszawa", "Kraków"],
                 ["TypeScript", "SQL", "PHP"],
                 ["Remote"],
@@ -292,7 +302,7 @@ class OfferSeeds
                         17_000,
                         19_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -300,11 +310,11 @@ class OfferSeeds
                         new Identifier("6a37b912-d8f6-488c-aa6d-c1c7a5bd3026"),
                         2,
                         SalaryType.NET,
-                        21_000,
-                        23_000,
+                        120,
+                        150,
                         null,
-                        new Currency("PLN"),
-                        BillingUnit.MONTH
+                        CurrencyCode.PLN,
+                        BillingUnit.HOUR
                     ),
                 ]
             ),
@@ -312,7 +322,8 @@ class OfferSeeds
                 new Identifier("923c67af-ec64-4d20-a0b7-ba423d2faee5"),
                 "Senior C# Developer",
                 _companies.ElementAt(1).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 9, 0, TimeSpan.Zero),
+                now.AddMinutes(9),
+                now.AddDays(30).AddMinutes(9),
                 ["Zielona Góra", "Gorzów Wielkopolski"],
                 ["C#", "Azure"],
                 ["Remote", "Hybrid", "OnSite"],
@@ -327,7 +338,7 @@ class OfferSeeds
                         15_000,
                         17_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -338,7 +349,7 @@ class OfferSeeds
                         14_000,
                         16_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -347,7 +358,8 @@ class OfferSeeds
                 new Identifier("9db0fdfd-d032-4b78-b850-75c7d90a8468"),
                 "Lead Python Developer",
                 _companies.ElementAt(2).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 10, 0, TimeSpan.Zero),
+                now.AddMinutes(10),
+                now.AddDays(30).AddMinutes(10),
                 ["Bydgoszcz", "Toruń", "Szczecin"],
                 ["AWS", "Python"],
                 ["Remote"],
@@ -362,7 +374,7 @@ class OfferSeeds
                         19_000,
                         22_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -373,7 +385,7 @@ class OfferSeeds
                         21_000,
                         24_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -382,7 +394,8 @@ class OfferSeeds
                 new Identifier("34744eb2-da49-4314-a49d-a42b9f0efbea"),
                 "Junior C# Developer",
                 _companies.ElementAt(3).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 11, 0, TimeSpan.Zero),
+                now.AddMinutes(11),
+                now.AddDays(30).AddMinutes(11),
                 ["Kielce", "Łódź"],
                 ["C#", "SQL"],
                 ["OnSite"],
@@ -397,7 +410,7 @@ class OfferSeeds
                         null,
                         null,
                         8_000,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -406,7 +419,8 @@ class OfferSeeds
                 new Identifier("f6f910b8-6667-425d-95e9-74810ff62b6e"),
                 "Fullstack Developer",
                 _companies.ElementAt(4).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 12, 0, TimeSpan.Zero),
+                now.AddMinutes(12),
+                now.AddDays(30).AddMinutes(12),
                 ["Gorzów Wielkopolski", "Zielona Góra"],
                 ["AWS", "Azure", "TypeScript", "JavaScript", "Python", "SQL"],
                 ["Hybrid"],
@@ -421,7 +435,7 @@ class OfferSeeds
                         17_000,
                         19_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -432,7 +446,7 @@ class OfferSeeds
                         19_000,
                         22_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -441,7 +455,8 @@ class OfferSeeds
                 new Identifier("1a5a4855-247d-49c6-9b43-b488317881ca"),
                 "Senior Rust Developer",
                 _companies.ElementAt(5).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 13, 0, TimeSpan.Zero),
+                now.AddMinutes(13),
+                now.AddDays(30).AddMinutes(13),
                 ["Wrocław"],
                 ["Rust", "C"],
                 ["Remote"],
@@ -456,7 +471,7 @@ class OfferSeeds
                         21_000,
                         25_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -465,7 +480,8 @@ class OfferSeeds
                 new Identifier("89ea7c6e-e49a-48d5-8439-03e21263b66e"),
                 "Mobile Developer",
                 _companies.ElementAt(6).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 14, 0, TimeSpan.Zero),
+                now.AddMinutes(14),
+                now.AddDays(30).AddMinutes(14),
                 ["Rzeszów", "Lublin"],
                 ["Mobile"],
                 ["Remote", "Hybrid"],
@@ -480,7 +496,7 @@ class OfferSeeds
                         16_000,
                         18_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -491,7 +507,7 @@ class OfferSeeds
                         16_500,
                         18_500,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -500,7 +516,8 @@ class OfferSeeds
                 new Identifier("ed31f986-09c2-4c9e-95ab-ea43e43e16e9"),
                 "Senior C/C++ Developer",
                 _companies.ElementAt(0).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 15, 0, TimeSpan.Zero),
+                now.AddMinutes(15),
+                now.AddDays(30).AddMinutes(15),
                 ["Gdańsk", "Gdynia", "Sopot"],
                 ["C", "C++", "C#"],
                 ["Hybrid", "OnSite"],
@@ -515,7 +532,7 @@ class OfferSeeds
                         null,
                         null,
                         17_500,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -524,7 +541,8 @@ class OfferSeeds
                 new Identifier("76dbce69-81ad-4ccb-befa-2707d94e25b5"),
                 "Junior JavaScript Developer",
                 _companies.ElementAt(1).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 16, 0, TimeSpan.Zero),
+                now.AddMinutes(16),
+                now.AddDays(30).AddMinutes(16),
                 ["Warszawa", "Kraków", "Wrocław", "Łódź", "Poznań", "Lublin"],
                 ["JavaScript"],
                 ["OnSite"],
@@ -539,7 +557,7 @@ class OfferSeeds
                         null,
                         null,
                         8_000,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -550,7 +568,7 @@ class OfferSeeds
                         null,
                         null,
                         8_500,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -559,7 +577,8 @@ class OfferSeeds
                 new Identifier("0e278e45-3b6c-42b9-90ce-e902034cbf18"),
                 "Rust Developer",
                 _companies.ElementAt(2).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 17, 0, TimeSpan.Zero),
+                now.AddMinutes(17),
+                now.AddDays(30).AddMinutes(17),
                 ["Warszawa", "Kraków"],
                 ["Rust", "SQL"],
                 ["Remote"],
@@ -574,7 +593,7 @@ class OfferSeeds
                         18_000,
                         21_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -583,7 +602,8 @@ class OfferSeeds
                 new Identifier("c74f934f-50e2-4655-9a37-2281cfddb043"),
                 "Senior Fullstack Developer",
                 _companies.ElementAt(3).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 18, 0, TimeSpan.Zero),
+                now.AddMinutes(18),
+                now.AddDays(30).AddMinutes(18),
                 ["Katowice", "Gliwice"],
                 ["TypeScript", "Python", "SQL"],
                 ["Remote", "Hybrid"],
@@ -598,7 +618,7 @@ class OfferSeeds
                         null,
                         null,
                         17_000,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -609,7 +629,7 @@ class OfferSeeds
                         null,
                         null,
                         19_000,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -620,7 +640,7 @@ class OfferSeeds
                         null,
                         null,
                         17_500,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -631,7 +651,7 @@ class OfferSeeds
                         null,
                         null,
                         18_000,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -640,7 +660,8 @@ class OfferSeeds
                 new Identifier("7ee41092-960f-4b93-8a8d-27fb32e30855"),
                 "Junior C# Developer",
                 _companies.ElementAt(4).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 19, 0, TimeSpan.Zero),
+                now.AddMinutes(19),
+                now.AddDays(30).AddMinutes(19),
                 ["Kraków", "Wrocław"],
                 ["Azure", "C#"],
                 ["Hybrid", "OnSite"],
@@ -655,7 +676,7 @@ class OfferSeeds
                         9_000,
                         10_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                     Salary.Create(
@@ -666,7 +687,7 @@ class OfferSeeds
                         10_000,
                         11_000,
                         null,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -675,7 +696,8 @@ class OfferSeeds
                 new Identifier("d36d28ac-1ec1-4e4a-bc31-1d353a3db78e"),
                 "Junior Python Developer",
                 _companies.ElementAt(5).Id,
-                new DateTimeOffset(2026, 03, 02, 18, 20, 0, TimeSpan.Zero),
+                now.AddMinutes(20),
+                now.AddDays(30).AddMinutes(20),
                 ["Warszawa", "Gdańsk"],
                 ["SQL", "Python", "JavaScript"],
                 ["OnSite"],
@@ -690,7 +712,7 @@ class OfferSeeds
                         null,
                         null,
                         7_000,
-                        new Currency("PLN"),
+                        CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
                 ]
@@ -701,14 +723,15 @@ class OfferSeeds
     }
 
     private Offer CreateOffer(Identifier id, Title title, Identifier companyId, DateTimeOffset createdAt,
-        string[] locations, string[] technologies, string[] workModes, string[] experienceLevels,
-        string[] employmentTypes, Salary[] salaries = default)
+        DateTimeOffset expiresAt, string[] locations, string[] technologies, string[] workModes,
+        string[] experienceLevels, string[] employmentTypes, Salary[] salaries = default)
     {
         var offer = Offer.Create(
             id,
             title,
             companyId,
-            createdAt
+            createdAt,
+            expiresAt
         );
 
         foreach (var salary in salaries)

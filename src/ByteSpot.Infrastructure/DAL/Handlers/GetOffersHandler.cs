@@ -21,14 +21,12 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
 
         if (query.SalaryMin is not null)
         {
-            offers = offers.Where(offer =>
-                offer.Salaries.Any() && offer.Salaries.Min(s => s.Min ?? s.Fixed) >= query.SalaryMin);
+            offers = offers.Where(offer => offer.SalaryMinComputed >= query.SalaryMin);
         }
 
         if (query.SalaryMax is not null)
         {
-            offers = offers.Where(offer =>
-                offer.Salaries.Any() && offer.Salaries.Max(s => s.Max ?? s.Fixed) <= query.SalaryMax);
+            offers = offers.Where(offer => offer.SalaryMaxComputed<= query.SalaryMax);
         }
 
         if (query.LocationIds is not null && query.LocationIds.Any())
@@ -70,8 +68,8 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
         offers = query.SortBy switch
         {
             OfferSort.Latest => offers.OrderByDescending(offer => offer.CreatedAt).ThenByDescending(offer => offer.Id),
-            OfferSort.HighestSalary => offers.OrderByDescending(offer => offer.Salaries.Max(s => s.Max ?? s.Fixed)).ThenByDescending(offer => offer.Id),
-            OfferSort.LowestSalary => offers.OrderBy(offer => offer.Salaries.Min(s => s.Min ?? s.Fixed)).ThenBy(offer => offer.Id),
+            OfferSort.HighestSalary => offers.OrderByDescending(offer => offer.SalaryMaxComputed).ThenByDescending(offer => offer.CreatedAt).ThenByDescending(offer => offer.Id),
+            OfferSort.LowestSalary => offers.OrderBy(offer => offer.SalaryMinComputed).ThenByDescending(offer => offer.CreatedAt).ThenBy(offer => offer.Id),
             _ => offers.OrderBy(offer => offer.Title)
         };
 
@@ -82,17 +80,19 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
                         offer.Id,
                         offer.Title,
                         offer.Company.Name,
-                        offer.Salaries.Select(s => new SalaryDto(s.Min, s.Max, s.Fixed)).ToList(),
+                        offer.Salaries.Select(s => new SalaryDto(s.Min, s.Max, s.Fixed, s.Type, s.CurrencyCode, s.BillingUnit, s.EmploymentType)).ToList(),
                         offer.Locations.Select(l => l.Name.Value).ToList(),
                         offer.Technologies.Select(t => t.Name.Value).ToList()
                     )
             ).ToListAsync();
 
+        var totalCount = await dbContext.Offers.CountAsync();
+
         return new PagedResult<OfferDto>(
             Items: items,
             PageNumber: query.PageNumber,
             PageSize: query.PageSize,
-            TotalCount: items.Count
+            TotalCount: totalCount
         );
     }
 }

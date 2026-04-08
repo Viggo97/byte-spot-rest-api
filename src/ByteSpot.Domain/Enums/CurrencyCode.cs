@@ -3,10 +3,9 @@
 namespace ByteSpot.Domain.Enums;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-
-public enum BillingUnit
+public enum CurrencyCode
 {
-    HOUR,
-    DAY,
-    MONTH,
+    PLN,
+    USD,
+    EUR,
 }
