@@ -53,7 +53,7 @@ internal sealed class GetOfferDetailsHandler(ByteSpotDbContext dbContext)
             offer.Technologies.Select(t => t.Name.Value).ToList(),
             workModes,
             experienceLevels,
-            "Not implemented"
+            offer.Description
         );
     }
 }

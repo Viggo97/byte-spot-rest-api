@@ -13,6 +13,7 @@ public class Offer
     public Company Company { get; private set; } = default!;
     public DateTimeOffset CreatedAt { get; private set; }
     public DateTimeOffset ExpiresAt { get; private set; }
+    public string Description { get; private set; }
     public ICollection<Salary> Salaries { get; private set; } = new List<Salary>();
     public int SalaryMinComputed { get; private set; } = default;
     public int SalaryMaxComputed { get; private set; } = default;
@@ -26,18 +27,20 @@ public class Offer
     {
     }
 
-    private Offer(Identifier id, Title title, Identifier companyId, DateTimeOffset createdAt, DateTimeOffset expiresAt)
+    private Offer(Identifier id, Title title, Identifier companyId, DateTimeOffset createdAt, DateTimeOffset expiresAt,
+        string description)
     {
         Id = id;
         Title = title;
         CompanyId = companyId;
         CreatedAt = createdAt;
         ExpiresAt = expiresAt;
+        Description = description;
     }
 
     public static Offer Create(Identifier id, Title title, Identifier companyId, DateTimeOffset createdAt,
-        DateTimeOffset expiresAt)
-        => new(id, title, companyId, createdAt, expiresAt);
+        DateTimeOffset expiresAt, string description)
+        => new(id, title, companyId, createdAt, expiresAt, description);
 
     public void AddSalary(Salary salary)
     {

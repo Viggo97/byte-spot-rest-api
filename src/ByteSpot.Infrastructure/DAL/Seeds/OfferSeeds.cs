@@ -86,7 +86,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy JavaScript Developera z co najmniej 2-letnim doświadczeniem komercyjnym w tworzeniu aplikacji webowych. Kandydat będzie pracować w zwinnym zespole nad rozwojem aplikacji frontendowych oraz integracji z backendem. Do zadań należeć będzie implementacja interfejsów użytkownika, optymalizacja wydajności renderowania, tworzenie komponentów wielokrotnego użytku oraz udział w procesie testowania. Wymagamy dobrej znajomości JavaScript (ES6+), doświadczenia z frameworkiem React lub Vue, umiejętności pracy z REST API, znajomości HTML5 i CSS3 oraz systemu Git. Doświadczenie z TypeScript, Webpack lub Vite będzie dodatkowym atutem. Oferujemy nowoczesne środowisko pracy, elastyczne godziny, możliwość pracy zdalnej lub hybrydowej, pakiet benefitów oraz jasną ścieżkę awansu w strukturach technicznych firmy."
             ),
             CreateOffer(
                 new Identifier("df08859f-df88-45bb-b59a-cd856e578f16"),
@@ -122,7 +123,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.HOUR
                     ),
-                ]
+                ],
+                "Poszukujemy Java Developera z 2-4 letnim doświadczeniem komercyjnym do pracy nad rozbudowanymi systemami backendowymi. Kandydat będzie częścią zespołu odpowiedzialnego za rozwój i utrzymanie mikroserwisów, integracje zewnętrzne oraz wydajność aplikacji. Do obowiązków należy implementacja i testowanie serwisów REST, praca z bazami danych SQL i NoSQL, udział w dyskusjach architektonicznych i code review. Wymagamy dobrej znajomości Javy 11 lub wyższej, frameworka Spring Boot, doświadczenia z JUnit, Maven lub Gradle oraz umiejętności pracy z systemami kolejkowymi. Znajomość konteneryzacji Docker oraz platform chmurowych (AWS, GCP, Azure) będzie dodatkowym atutem. Oferujemy pełne wsparcie przy wdrożeniu, możliwość pracy hybrydowej lub zdalnej, benefity pracownicze, dofinansowanie szkoleń i pracę przy skalowanych systemach produkcyjnych."
             ),
             CreateOffer(
                 new Identifier("8cae5d4f-eb4a-4a15-b504-6ee321ee1534"),
@@ -147,7 +149,8 @@ class OfferSeeds
                         CurrencyCode.USD,
                         BillingUnit.MONTH   
                     ),
-                ]
+                ],
+                "Poszukujemy Senior C# Developera z minimum 5 letnim doświadczeniem komercyjnym w ekosystemie .NET. Kandydat obejmie kluczową rolę w zespole inżynierskim, prowadząc projekt techniczny, wspierając kolegów i dbając o jakość wytwarzanego oprogramowania. Do obowiązków należy projektowanie rozwiązań w architekturze mikroserwisowej lub monolitycznej, implementacja w C# i ASP.NET Core, definiowanie dobrych praktyk oraz prowadzenie code review. Wymagamy zaawansowanej znajomości C#, .NET 6 lub nowszego, doświadczenia z Entity Framework, bazami danych SQL Server oraz znajomości wzorców projektowych. Oczekujemy umiejętności pisania testów automatycznych i doświadczenia z Azure lub AWS. Dobra komunikacja i zdolność do pracy z rozproszonymi zespołami są niezbędne. Oferujemy pracę zdalną lub hybrydową, wysokie wynagrodzenie, realny wpływ na architekturę systemu i silną kulturę inżynierską."
             ),
             CreateOffer(
                 new Identifier("db657ff0-115b-484b-b19a-51704e8dbc93"),
@@ -194,7 +197,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Zapraszamy Junior Go Developera do dołączenia do naszego zespołu pracującego nad wysokowydajnymi serwisami backendowymi. To idealna oferta dla osoby, która zna podstawy Go i chce rozwijać się w budowaniu systemów rozproszonych. Do obowiązków należeć będzie implementacja mikroserwisów w Go, pisanie testów, udział w code review oraz stopniowe przejmowanie samodzielnych zadań. Wymagamy podstawowej znajomości języka Go, rozumienia koncepcji goroutine i kanałów, umiejętności pracy z Git i podstaw protokołu HTTP. Doświadczenie z frameworkiem Gin, Echo lub doświadczenie z Docker będzie plusem. Oczekujemy ciekawości technicznej, komunikatywności i chęci uczenia się od bardziej doświadczonych kolegów. Oferujemy środowisko sprzyjające eksperymentowaniu, mentoring seniorów, elastyczny czas pracy, dostęp do kursów i konferencji oraz atrakcyjny pakiet startowy."
             ),
             CreateOffer(
                 new Identifier("f46fc3a8-be21-4451-91e4-45015f71e4df"),
@@ -219,7 +223,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy Python Developera z 2-4 letnim doświadczeniem do pracy nad aplikacjami backendowymi, narzędziami danych lub serwisami API. Kandydat będzie odpowiedzialny za implementację i utrzymanie serwisów backendowych, integrację z zewnętrznymi dostawcami, pisanie testów automatycznych oraz uczestnictwo w przeglądach kodu. Wymagamy dobrej znajomości Pythona 3, doświadczenia z jednym z frameworków (Django, FastAPI lub Flask), umiejętności pracy z relacyjnymi i dokumentowymi bazami danych, znajomości Docker i systemu Git. Doświadczenie z przetwarzaniem danych (Pandas, NumPy) lub uczeniem maszynowym będzie dodatkowym atutem. Cenimy czytelny kod, dokumentowanie pracy i proaktywną komunikację. Oferujemy elastyczny model pracy, możliwość wyboru formy zatrudnienia (UoP lub B2B), prywatną opiekę medyczną i budżet szkoleniowy."
             ),
             CreateOffer(
                 new Identifier("87ab8cad-f4a7-4e7e-a174-b8618c93ecf5"),
@@ -255,7 +260,8 @@ class OfferSeeds
                         CurrencyCode.EUR,
                         BillingUnit.DAY
                     ),
-                ]
+                ],
+                "Poszukujemy doświadczonego Senior Java Developera do dołączenia do naszego zespołu backendowego. Kandydat powinien posiadać co najmniej 5 lat doświadczenia komercyjnego w Javie oraz udokumentowaną historię pracy z dużymi systemami produkcyjnymi. Do obowiązków należeć będzie projektowanie i implementacja serwisów w oparciu o Spring Boot, optymalizacja zapytań do baz danych, definiowanie standardów kodowania w zespole oraz aktywny udział w procesach rekrutacyjnych. Wymagamy biegłej znajomości Javy 11 lub nowszej, frameworka Spring (Boot, Security, Data), doświadczenia z bazami danych SQL i NoSQL, znajomości Dockera i Kubernetes oraz rozumienia wzorców DDD i CQRS. Doświadczenie z Apache Kafka lub RabbitMQ będzie atutem. Oferujemy pracę nad produktem używanym przez miliony użytkowników, kulturę feedbacku, budżet szkoleniowy i atrakcyjny pakiet wynagrodzenia."
             ),
             CreateOffer(
                 new Identifier("44c4509c-d56f-422c-b601-35d5c69283e7"),
@@ -280,7 +286,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy programisty TypeScript do pracy nad nowoczesnymi aplikacjami webowymi i backendowymi. Kandydat powinien posiadać co najmniej 2 lata doświadczenia komercyjnego z TypeScript oraz dobrą znajomość ekosystemu JavaScript. Do obowiązków należeć będzie tworzenie komponentów frontendowych lub serwisów backendowych z użyciem TypeScript, dbanie o jakość typowania i strukturę kodu, udział w code review oraz współpraca z zespołem projektowym i UX. Wymagamy biegłości w TypeScript, znajomości co najmniej jednego frameworka (React, Angular, Vue lub Node.js), zrozumienia wzorców projektowych oraz umiejętności pracy z REST API lub GraphQL. Doświadczenie z testowaniem (Jest, Vitest) będzie dodatkowym atutem. Oferujemy elastyczny model pracy, nowoczesny stack technologiczny oraz realny wpływ na architekturę rozwijanych systemów."
             ),
             CreateOffer(
                 new Identifier("6a37b912-d8f6-488c-aa6d-c1c7a5bd3026"),
@@ -316,7 +323,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.HOUR
                     ),
-                ]
+                ],
+                "Szukamy doświadczonego Senior JavaScript Developera z minimum 5-letnim stażem w tworzeniu aplikacji webowych. Kandydat będzie odpowiedzialny za tworzenie zaawansowanych rozwiązań frontendowych lub fullstackowych, architekturę modułów, mentoring młodszych programistów oraz udział w procesie rekrutacji technicznej. Wymagamy głębokiej znajomości JavaScript (ES6+), biegłości w co najmniej jednym z frameworków React, Vue lub Angular, rozumienia optymalizacji wydajności, zarządzania stanem aplikacji oraz budowania systemów komponentowych. Doświadczenie z TypeScript, znajomość narzędzi bundlujących (Webpack, Vite) oraz CI/CD będzie mile widziane. Oczekujemy samodzielności, umiejętności prowadzenia dyskusji technicznych oraz dobrego poziomu angielskiego. Oferujemy wysokie wynagrodzenie, elastyczną formę współpracy (B2B lub UoP), prywatną opiekę zdrowotną oraz dofinansowanie konferencji branżowych."
             ),
             CreateOffer(
                 new Identifier("923c67af-ec64-4d20-a0b7-ba423d2faee5"),
@@ -352,7 +360,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Jesteśmy w trakcie rozbudowy naszego działu produktowego i poszukujemy doświadczonego Senior C# Developera. Oczekujemy od kandydata co najmniej 5 lat pracy z C# i platformą .NET oraz głębokiej znajomości zasad SOLID, wzorców projektowych i najlepszych praktyk inżynierskich. Do zadań należeć będzie implementacja złożonych funkcjonalności biznesowych, współpraca z analitykami i product ownerami, prowadzenie przeglądu kodu oraz aktywne uczestnictwo w planowaniu architektury. Wymagamy biegłości w ASP.NET Core, znajomości platform chmurowych, doświadczenia z Docker i Kubernetes oraz umiejętności pracy z bazami danych SQL i NoSQL. Kandydat powinien wykazywać proaktywną postawę i inicjatywę. Oferujemy możliwość pracy w pełni zdalnej, prywatną opiekę medyczną, pakiet benefitów kafeteryjnych, dofinansowanie sprzętu oraz atmosferę opartą na zaufaniu i odpowiedzialności."
             ),
             CreateOffer(
                 new Identifier("9db0fdfd-d032-4b78-b850-75c7d90a8468"),
@@ -388,7 +397,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy Lead Python Developera, który obejmie techniczną odpowiedzialność za jeden z naszych kluczowych produktów. Kandydat powinien posiadać minimum 6 lat doświadczenia z Pythonem oraz wcześniejsze doświadczenie w roli tech leada lub seniora z aspiracjami przywódczymi. Do obowiązków należeć będzie prowadzenie zespołu developerskiego, definiowanie standardów technicznych, architektura systemów backendowych, mentoring i code review. Wymagamy zaawansowanej znajomości Pythona, frameworków FastAPI lub Django, baz danych SQL i NoSQL, doświadczenia z systemami kolejkowymi (Kafka, RabbitMQ) oraz infrastrukturą chmurową. Oczekujemy umiejętności zarządzania zadaniami zespołu, prowadzenia rozmów 1:1 oraz współpracy z działem produktu. Oferujemy stanowisko z realnym wpływem na kierunek techniczny firmy, pakiet akcji lub udziałów, wysoki budżet szkoleniowy i współpracę z najlepszymi inżynierami."
             ),
             CreateOffer(
                 new Identifier("34744eb2-da49-4314-a49d-a42b9f0efbea"),
@@ -413,7 +423,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Oferujemy stanowisko Junior C# Developer dla osoby rozpoczynającej karierę w programowaniu lub posiadającej pierwsze doświadczenia komercyjne. Szukamy zmotywowanego kandydata, który chce rozwijać się w ekosystemie .NET. Do obowiązków należeć będzie tworzenie i utrzymanie aplikacji w języku C# z wykorzystaniem platformy .NET, udział w codziennych spotkaniach zespołu, pisanie testów jednostkowych oraz dokumentowanie kodu. Wymagamy podstawowej znajomości języka C# i frameworka .NET, rozumienia paradygmatu obiektowego, znajomości relacyjnych baz danych oraz podstaw pracy z Git. Mile widziane są doświadczenia z ASP.NET Core lub Entity Framework. Oferujemy mentoring ze strony doświadczonych programistów, jasną ścieżkę kariery, dostęp do platform edukacyjnych oraz przyjazną atmosferę pracy sprzyjającą nauce."
             ),
             CreateOffer(
                 new Identifier("f6f910b8-6667-425d-95e9-74810ff62b6e"),
@@ -449,7 +460,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy Fullstack Developera z 2-4 letnim doświadczeniem, który chce pracować nad kompletem produktu od frontendu do backendu. Kandydat będzie odpowiedzialny za implementację nowych funkcjonalności, utrzymanie istniejących modułów, integrację z zewnętrznymi API oraz dbanie o jakość i testowalność kodu. Wymagamy dobrej znajomości JavaScript lub TypeScript po stronie frontendu (React, Vue lub Angular) oraz backendu (Node.js, Python lub Java), umiejętności projektowania i konsumowania REST API, znajomości relacyjnych baz danych oraz podstaw Docker i Git. Mile widziane jest doświadczenie z platformami chmurowymi i narzędziami CI/CD. Oferujemy pracę w niewielkim, zgranym zespole, realny wpływ na produkt, elastyczne godziny, nowoczesny stack technologiczny, opiekę medyczną i dodatkowe benefity."
             ),
             CreateOffer(
                 new Identifier("1a5a4855-247d-49c6-9b43-b488317881ca"),
@@ -474,7 +486,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Szukamy doświadczonego Senior Rust Developera, który dołączy do naszego zespołu i weźmie aktywny udział w tworzeniu zaawansowanych systemów backendowych. Oczekujemy minimum 5 lat doświadczenia w programowaniu, w tym co najmniej 3 lata pracy z językiem Rust w środowisku produkcyjnym. Kandydat powinien doskonale rozumieć koncepcje ownership, borrowing i lifetimes, posiadać praktyczną znajomość frameworków asynchronicznych (Tokio, async-std) oraz doświadczenie w projektowaniu skalowalnych architektur. Do obowiązków będzie należeć prowadzenie zespołu technicznego, mentoring młodszych programistów, udział w planowaniu sprintów oraz podejmowanie kluczowych decyzji architektonicznych. Wymagana jest także umiejętność integracji z bazami danych, znajomość konteneryzacji (Docker, Kubernetes) oraz doświadczenie z CI/CD. Oferujemy konkurencyjne wynagrodzenie, prywatną opiekę medyczną, budżet szkoleniowy i możliwość realnego wpływu na kształt produktu."
             ),
             CreateOffer(
                 new Identifier("89ea7c6e-e49a-48d5-8439-03e21263b66e"),
@@ -510,7 +523,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy Mobile Developera do tworzenia nowoczesnych aplikacji mobilnych na platformy iOS i Android. Kandydat będzie odpowiedzialny za projektowanie i implementację funkcjonalności aplikacji mobilnych, współpracę z zespołem backendowym przy integracji API, a także optymalizację działania aplikacji i dbanie o jakość kodu. Wymagamy co najmniej 2 lat doświadczenia w tworzeniu aplikacji mobilnych, znajomości React Native, Flutter, Swift lub Kotlin. Oczekujemy rozumienia cyklu życia aplikacji mobilnych, doświadczenia z publikacją w App Store i Google Play oraz znajomości REST API. Mile widziane jest doświadczenie z push notifications, animacjami i obsługą urządzeń z różnymi rozdzielczościami ekranu. Oferujemy pracę przy innowacyjnych projektach, nowoczesny sprzęt, elastyczny model pracy oraz możliwość udziału w konferencjach mobilnych."
             ),
             CreateOffer(
                 new Identifier("ed31f986-09c2-4c9e-95ab-ea43e43e16e9"),
@@ -535,7 +549,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy doświadczonego Senior C/C++ Developera specjalizującego się w programowaniu systemowym, wbudowanym lub niskopoziomowym. Kandydat powinien posiadać minimum 5 lat komercyjnego doświadczenia z C lub C++ oraz udokumentowaną historię pracy w wymagających środowiskach. Do obowiązków należy tworzenie i optymalizacja kodu niskopoziomowego, analiza wydajnościowa, praca z pamięcią i zarządzanie zasobami systemowymi, a także współpraca z zespołami firmware i hardware. Wymagamy zaawansowanej znajomości C++17 lub nowszego, doświadczenia z wielowątkowością i synchronizacją, znajomości narzędzi do profilowania i debugowania (Valgrind, GDB) oraz systemów budowania (CMake). Doświadczenie z systemami real-time lub wbudowanymi (RTOS, ARM) będzie mile widziane. Oferujemy udział w innowacyjnych projektach technologicznych, elastyczne warunki zatrudnienia, wysokie wynagrodzenie i budżet na sprzęt."
             ),
             CreateOffer(
                 new Identifier("76dbce69-81ad-4ccb-befa-2707d94e25b5"),
@@ -571,7 +586,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Szukamy Junior JavaScript Developera, który stawia pierwsze kroki w komercyjnym programowaniu i chce rozwijać się w środowisku nowoczesnych aplikacji webowych. Do zadań na tym stanowisku należeć będzie implementacja interfejsów użytkownika, poprawki błędów, udział w code review jako obserwator oraz stopniowe przejmowanie samodzielnych zadań pod okiem seniora. Wymagamy znajomości podstaw JavaScript, HTML i CSS, rozumienia DOM oraz podstawowej orientacji w frameworkach takich jak React lub Vue. Znajomość systemu Git, umiejętność komunikacji w zespole i chęć uczenia się są dla nas równie ważne jak wiedza techniczna. Oferujemy program wdrożeniowy, regularne sesje 1:1 z mentorem, dostęp do kursów online oraz realną możliwość awansu wraz ze wzrostem kompetencji."
             ),
             CreateOffer(
                 new Identifier("0e278e45-3b6c-42b9-90ce-e902034cbf18"),
@@ -596,7 +612,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy doświadczonego programisty Rust do naszego zespołu inżynierskiego. Kandydat będzie odpowiedzialny za projektowanie i implementację wydajnych, bezpiecznych aplikacji backendowych oraz systemowych. Do głównych obowiązków należy pisanie czystego i testowalnego kodu w języku Rust, udział w przeglądach kodu, projektowanie architektury mikroserwisów oraz optymalizacja wydajności istniejących rozwiązań. Wymagamy co najmniej 2 lat komercyjnego doświadczenia z językiem Rust, znajomości bibliotek takich jak Tokio, Actix lub Axum, wiedzy na temat programowania asynchronicznego oraz znajomości systemów kontroli wersji, w szczególności Git. Dodatkowym atutem będzie doświadczenie z WebAssembly lub systemami wbudowanymi. Oferujemy pracę w dynamicznym środowisku, elastyczne godziny pracy, możliwość pracy zdalnej oraz atrakcyjne wynagrodzenie dostosowane do poziomu umiejętności kandydata."
             ),
             CreateOffer(
                 new Identifier("c74f934f-50e2-4655-9a37-2281cfddb043"),
@@ -654,7 +671,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy Senior Fullstack Developera do budowania produktów w nowoczesnym stacku technologicznym. Kandydat będzie odpowiedzialny zarówno za warstwę frontendową, jak i backendową aplikacji, uczestniczyć będzie w projektowaniu architektury, prowadzeniu code review i wsparciu młodszych kolegów. Wymagamy minimum 5 lat doświadczenia w tworzeniu aplikacji webowych, biegłości w React lub Vue (frontend) oraz Node.js, Python lub Java (backend), a także znajomości relacyjnych i nierelacyjnych baz danych. Niezbędna jest umiejętność pracy z REST API lub GraphQL, konteneryzacją oraz doświadczenie z CI/CD. Oczekujemy samodzielności, umiejętności oceny trade-offów technicznych i dobrego poziomu języka angielskiego. Oferujemy pracę przy ambitnych produktach, elastyczny grafik, nowoczesne narzędzia, prywatną opiekę zdrowotną, dofinansowanie nauki oraz integracje zespołowe."
             ),
             CreateOffer(
                 new Identifier("7ee41092-960f-4b93-8a8d-27fb32e30855"),
@@ -690,7 +708,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy Junior C# Developera chętnego do nauki i rozwijania swoich umiejętności w środowisku .NET. Na tym stanowisku będziesz pracować w bliskim kontakcie z doświadczonymi programistami, stopniowo przejmując coraz bardziej złożone zadania. Do codziennych obowiązków należeć będzie implementacja funkcjonalności w C#, udział w testowaniu aplikacji, analiza i naprawa błędów oraz uczestnictwo w spotkaniach zespołu. Wymagamy podstawowej znajomości C# i platformy .NET, zrozumienia programowania obiektowego oraz umiejętności pracy z Git. Doświadczenie z bazami danych SQL oraz ASP.NET będzie dodatkowym atutem. Szanujemy chęć do nauki ponad wszystko i zapewniamy środowisko, w którym pytania są mile widziane. Oferujemy opiekę medyczną, kartę sportową, elastyczne godziny i wsparcie w zdobywaniu certyfikatów branżowych."
             ),
             CreateOffer(
                 new Identifier("d36d28ac-1ec1-4e4a-bc31-1d353a3db78e"),
@@ -715,7 +734,8 @@ class OfferSeeds
                         CurrencyCode.PLN,
                         BillingUnit.MONTH
                     ),
-                ]
+                ],
+                "Poszukujemy ambitnego Junior Python Developera do naszego rosnącego zespołu backendowego. Stanowisko skierowane jest do osób z pierwszymi doświadczeniami komercyjnymi lub absolwentów kierunków technicznych, którzy chcą rozwijać się w programowaniu w Pythonie. Do obowiązków należeć będzie implementacja nowych funkcjonalności, poprawianie błędów, pisanie testów jednostkowych i współpraca przy integracji z zewnętrznymi API. Wymagamy znajomości podstaw Pythona, zrozumienia programowania obiektowego i funkcyjnego, umiejętności pracy z Git oraz podstaw obsługi baz danych SQL. Znajomość frameworków Django lub Flask będzie dodatkowym atutem. Chęć do nauki i otwartość na feedback są dla nas tak samo ważne jak umiejętności techniczne. Oferujemy program mentorski, jasny plan rozwoju, elastyczne warunki pracy, dofinansowanie szkoleń i certyfikatów."
             ),
         ];
 
@@ -724,14 +744,15 @@ class OfferSeeds
 
     private Offer CreateOffer(Identifier id, Title title, Identifier companyId, DateTimeOffset createdAt,
         DateTimeOffset expiresAt, string[] locations, string[] technologies, string[] workModes,
-        string[] experienceLevels, string[] employmentTypes, Salary[] salaries = default)
+        string[] experienceLevels, string[] employmentTypes, Salary[] salaries, string description)
     {
         var offer = Offer.Create(
             id,
             title,
             companyId,
             createdAt,
-            expiresAt
+            expiresAt,
+            description
         );
 
         foreach (var salary in salaries)

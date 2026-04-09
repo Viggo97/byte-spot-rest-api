@@ -20,6 +20,10 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
             .HasConversion(title => title.Value, value => new Title(value));
 
         builder
+            .Property(offer => offer.Description)
+            .HasMaxLength(1200);
+
+        builder
             .HasMany(offer => offer.Salaries)
             .WithOne(salary => salary.Offer);
 
