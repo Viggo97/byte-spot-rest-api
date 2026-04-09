@@ -1,5 +1,4 @@
-﻿using ByteSpot.Domain.Entities;
-using ByteSpot.Domain.Enums;
+﻿using ByteSpot.Domain.Enums;
 
 namespace ByteSpot.Application.Dto;
 
@@ -10,4 +9,4 @@ public sealed record SalaryDto(
     SalaryType Type,
     CurrencyCode CurrencyCode,
     BillingUnit BillingUnit,
-    EmploymentType EmploymentType);
+    EmploymentTypeDto EmploymentType);

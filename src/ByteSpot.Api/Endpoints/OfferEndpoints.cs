@@ -1,8 +1,8 @@
-﻿using ByteSpot.Application.Abstractions;
+﻿using ByteSpot.Api.Utils;
+using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Common;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
-using ByteSpot.Domain.ValueObjects.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteSpot.Api.Endpoints;
@@ -49,6 +49,14 @@ public static class OfferEndpoints
         {
           var suggestions = await handler.HandleAsync(new GetOfferSuggestionsQuery(searchPhrase));
             return Results.Ok(suggestions);
+        });
+
+        app.MapGet($"{Route}/{{id}}", async (Guid id, IQueryHandler<GetOfferDetailsQuery, OfferDetailsDto> handler,
+            HttpContext httpContext) =>
+        {
+            var languageCode = LanguageCodeConverter.Get(httpContext);
+            var offerDetails = await handler.HandleAsync(new GetOfferDetailsQuery(id, languageCode));
+            return Results.Ok(offerDetails);
         });
 
         return app;
