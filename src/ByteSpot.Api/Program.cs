@@ -27,6 +27,8 @@ app
     .UseHttpsRedirection()
     .UseCors(CorsConfiguration.CorsPolicy);
 
+app.UseInfrastructure();
+
 app
     .MapOfferEndpoints()
     .MapCompanyEndpoints()

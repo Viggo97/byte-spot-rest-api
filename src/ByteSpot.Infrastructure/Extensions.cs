@@ -1,6 +1,8 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Infrastructure.Abstractions;
 using ByteSpot.Infrastructure.DAL;
+using ByteSpot.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,7 @@ public static class Extensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres(configuration);
+        services.AddSingleton<ExceptionMiddleware>();
         
         // TODO uncomment while commands implementation
         // services
@@ -26,6 +29,13 @@ public static class Extensions
             );
         
         return services;
+    }
+
+    public static WebApplication UseInfrastructure(this WebApplication app)
+    {
+        app.UseMiddleware<ExceptionMiddleware>();
+
+        return app;
     }
 
     public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : class, new()
