@@ -19,6 +19,7 @@ internal sealed class ByteSpotDbContext(DbContextOptions<ByteSpotDbContext> cont
     public DbSet<WorkModeTranslation> WorkModeTranslations => Set<WorkModeTranslation>();
     public DbSet<EmploymentTypeTranslation> EmploymentTypeTranslations => Set<EmploymentTypeTranslation>();
     public DbSet<ExperienceLevelTranslation> ExperienceLevelTranslations => Set<ExperienceLevelTranslation>();
+    public DbSet<User> Users => Set<User>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

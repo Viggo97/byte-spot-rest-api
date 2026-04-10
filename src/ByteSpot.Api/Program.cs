@@ -30,6 +30,7 @@ app
 app.UseInfrastructure();
 
 app
+    .MapUserEndpoints()
     .MapOfferEndpoints()
     .MapCompanyEndpoints()
     .MapLocationEndpoints()
