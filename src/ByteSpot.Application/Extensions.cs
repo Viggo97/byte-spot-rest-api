@@ -12,7 +12,15 @@ public static class Extensions
         services
             .Scan(source =>
                 source.FromAssemblies(applicationAssembly)
-                    .AddClasses(c => c.AssignableTo((typeof(IQueryHandler<,>))))
+                    .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
+            );
+        
+        services
+            .Scan(source =>
+                source.FromAssemblies(applicationAssembly)
+                    .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)), publicOnly: false)
                     .AsImplementedInterfaces()
                     .WithScopedLifetime()
             );

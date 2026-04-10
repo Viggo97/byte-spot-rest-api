@@ -1,7 +1,9 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Infrastructure.Abstractions;
 using ByteSpot.Infrastructure.DAL;
+using ByteSpot.Infrastructure.DAL.Decorators;
 using ByteSpot.Infrastructure.Exceptions;
+using ByteSpot.Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,16 +16,16 @@ public static class Extensions
     {
         services.AddPostgres(configuration);
         services.AddSingleton<ExceptionMiddleware>();
+        services.AddSecurity();
         
-        // TODO uncomment while commands implementation
-        // services
-        //     .Decorate(typeof(ICommandHandler<>), typeof(CommandHandlerUnitOfWorkDecorator<>));
+        services
+            .Decorate(typeof(ICommandHandler<>), typeof(CommandHandlerUnitOfWorkDecorator<>));
         
         var infrastructureAssembly = typeof(IUnitOfWork).Assembly;
         services
             .Scan(source =>
                 source.FromAssemblies(infrastructureAssembly)
-                    .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)), false)
+                    .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
                     .AsImplementedInterfaces()
                     .WithScopedLifetime()
             );
