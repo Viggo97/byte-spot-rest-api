@@ -1,5 +1,4 @@
 ﻿using ByteSpot.Domain.Entities;
-using ByteSpot.Domain.Exceptions.Shared;
 using ByteSpot.Domain.Repositories;
 using ByteSpot.Domain.ValueObjects.Shared;
 using ByteSpot.Domain.ValueObjects.User;
@@ -24,12 +23,24 @@ internal sealed class PostgresUserRepository : IUserRepository
 
     public async Task<User?> GetByIdAsync(Identifier id)
     {
-        return await _dbContext.Users.SingleOrDefaultAsync(user => user.Id == id);
+        return await _dbContext.Users
+            .Include(user => user.RefreshToken)
+            .SingleOrDefaultAsync(user => user.Id == id);
     }
 
     public async Task<User?> GetByEmailAsync(Email email)
     {
-        return await _dbContext.Users.SingleOrDefaultAsync(user => user.Email == email);
+        return await _dbContext.Users
+            .Include(user => user.RefreshToken)
+            .SingleOrDefaultAsync(user => user.Email == email);
+
+    }
+    
+    public async Task<User?> GetByRefreshTokenAsync(string refreshToken)
+    {
+        return await _dbContext.Users
+            .Include(user => user.RefreshToken)
+            .SingleOrDefaultAsync(user => user.RefreshToken != null && user.RefreshToken.Token == refreshToken);
     }
 
     public async Task AddAsync(User user)
@@ -47,5 +58,12 @@ internal sealed class PostgresUserRepository : IUserRepository
     {
         _dbContext.Remove(user);
         return Task.CompletedTask;
+    }
+    
+    public async Task RemoveRefreshTokenAsync(string refreshToken)
+    {
+        await _dbContext.RefreshTokens
+            .Where(t => t.Token == refreshToken)
+            .ExecuteDeleteAsync();
     }
 }

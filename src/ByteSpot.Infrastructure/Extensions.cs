@@ -1,5 +1,6 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Infrastructure.Abstractions;
+using ByteSpot.Infrastructure.Auth;
 using ByteSpot.Infrastructure.DAL;
 using ByteSpot.Infrastructure.DAL.Decorators;
 using ByteSpot.Infrastructure.Exceptions;
@@ -16,7 +17,9 @@ public static class Extensions
     {
         services.AddPostgres(configuration);
         services.AddSingleton<ExceptionMiddleware>();
+        services.AddHttpContextAccessor();
         services.AddSecurity();
+        services.AddAuth(configuration);
         
         services
             .Decorate(typeof(ICommandHandler<>), typeof(CommandHandlerUnitOfWorkDecorator<>));
@@ -36,6 +39,8 @@ public static class Extensions
     public static WebApplication UseInfrastructure(this WebApplication app)
     {
         app.UseMiddleware<ExceptionMiddleware>();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         return app;
     }

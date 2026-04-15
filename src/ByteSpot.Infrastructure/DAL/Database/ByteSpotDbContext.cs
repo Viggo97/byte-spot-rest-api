@@ -20,6 +20,7 @@ internal sealed class ByteSpotDbContext(DbContextOptions<ByteSpotDbContext> cont
     public DbSet<EmploymentTypeTranslation> EmploymentTypeTranslations => Set<EmploymentTypeTranslation>();
     public DbSet<ExperienceLevelTranslation> ExperienceLevelTranslations => Set<ExperienceLevelTranslation>();
     public DbSet<User> Users => Set<User>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

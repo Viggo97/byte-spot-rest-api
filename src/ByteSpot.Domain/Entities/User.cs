@@ -12,8 +12,9 @@ public class User
     public FirstName FirstName { get; private set; }
     public LastName LastName { get; private set; }
     public DateTimeOffset CreatedAt { get; private set; }
+    public RefreshToken? RefreshToken { get; set; }
 
-    public User(Identifier id, Email email, Password password, Role role, FirstName firstName, LastName lastName,
+    private User(Identifier id, Email email, Password password, Role role, FirstName firstName, LastName lastName,
         DateTimeOffset createdAt)
     {
         Id = id;
@@ -24,4 +25,8 @@ public class User
         LastName = lastName;
         CreatedAt = createdAt;
     }
+
+    public static User Create(Identifier id, Email email, Password password, Role role, FirstName firstName,
+        LastName lastName, DateTimeOffset createdAt)
+        => new(id, email, password, role, firstName, lastName, createdAt);
 }
