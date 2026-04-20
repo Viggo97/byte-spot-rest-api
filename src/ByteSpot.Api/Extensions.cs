@@ -17,6 +17,7 @@ public static class Extensions
                     .WithOrigins(corsOptions.AllowedOrigins)
                     .AllowAnyHeader()
                     .AllowAnyMethod()
+                    .AllowCredentials()
                 );
         });
 

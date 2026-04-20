@@ -78,7 +78,9 @@ internal sealed class Authenticator : IAuthenticator
             HttpOnly = true,
             IsEssential = true,
             Secure = true,
-            SameSite = SameSiteMode.Strict,
+            // Intentionally set to none, because client is hosted on different domain. To prevent CSRF, they should
+            // use the same domain.
+            // SameSite = SameSiteMode.Strict,
             Expires = expires,
         });
     }
