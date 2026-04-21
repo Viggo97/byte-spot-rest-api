@@ -80,7 +80,7 @@ internal sealed class Authenticator : IAuthenticator
             Secure = true,
             // Intentionally set to none, because client is hosted on different domain. To prevent CSRF, they should
             // use the same domain.
-            // SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.None,
             Expires = expires,
         });
     }
