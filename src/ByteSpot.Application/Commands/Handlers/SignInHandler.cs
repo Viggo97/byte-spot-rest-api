@@ -1,4 +1,5 @@
 ﻿using ByteSpot.Application.Abstractions;
+using ByteSpot.Application.Dto;
 using ByteSpot.Application.Security;
 using ByteSpot.Domain.Exceptions.Auth;
 using ByteSpot.Domain.Exceptions.User;
@@ -11,17 +12,20 @@ internal sealed class SignInHandler : ICommandHandler<SignInCommand>
 {
     private readonly IPasswordManager _passwordManager;
     private readonly IAuthenticator _authenticator;
+    private readonly ISignInStorage _signInStorage;
     private readonly IUserRepository _userRepository;
 
     public SignInHandler
     (
         IPasswordManager passwordManager,
         IAuthenticator authenticator,
+        ISignInStorage signInStorage,
         IUserRepository userRepository
     )
     {
         _passwordManager = passwordManager;
         _authenticator = authenticator;
+        _signInStorage = signInStorage;
         _userRepository = userRepository;
     }
 
@@ -48,5 +52,6 @@ internal sealed class SignInHandler : ICommandHandler<SignInCommand>
 
         _authenticator.AppendAuthTokenCookie(AuthCookieKey.AccessToken, accessToken, expires);
         _authenticator.AppendAuthTokenCookie(AuthCookieKey.RefreshToken, refreshToken.Token, refreshToken.ExpiresAt);
+        _signInStorage.Set(new UserDto(user.Id, user.FirstName, user.LastName));
     }
 }

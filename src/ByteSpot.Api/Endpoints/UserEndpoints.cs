@@ -1,5 +1,6 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Commands;
+using ByteSpot.Application.Security;
 using ByteSpot.Domain.ValueObjects.User;
 
 namespace ByteSpot.Api.Endpoints;
@@ -16,10 +17,12 @@ public static class UserEndpoints
             return Results.Created();
         });
         
-        app.MapPost($"{Route}/sign-in", async (SignInCommand command, ICommandHandler<SignInCommand> handler) =>
+        app.MapPost($"{Route}/sign-in", async (SignInCommand command, ICommandHandler<SignInCommand> handler,
+            ISignInStorage signInStorage) =>
         {
             await handler.HandleAsync(command);
-            return Results.Ok();
+            var userDto = signInStorage.Get();
+            return Results.Ok(userDto);
         });
         
         app.MapPost($"{Route}/refresh-token", async (HttpContext httpContext, ICommandHandler<RefreshTokenCommand> handler) =>
