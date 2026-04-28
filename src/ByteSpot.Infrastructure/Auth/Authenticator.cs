@@ -66,7 +66,7 @@ internal sealed class Authenticator : IAuthenticator
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
         var refreshToken = WebEncoders.Base64UrlEncode(randomNumber);
-        var expires = DateTimeOffset.UtcNow.AddDays(_options.ExpiryRefreshToken.Days);
+        var expires = DateTimeOffset.UtcNow.Add(_options.ExpiryRefreshToken);
         
         return RefreshToken.Create(new Identifier(Guid.NewGuid()), refreshToken, expires);
     }
