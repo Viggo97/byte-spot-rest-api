@@ -25,13 +25,15 @@ public static class UserEndpoints
             return Results.Ok(userDto);
         });
         
-        app.MapPost($"{Route}/refresh-token", async (HttpContext httpContext, ICommandHandler<RefreshTokenCommand> handler) =>
+        app.MapPost($"{Route}/refresh-token", async (HttpContext httpContext, ICommandHandler<RefreshTokenCommand> handler,
+            ISignInStorage signInStorage) =>
         {
             var refreshToken = httpContext.Request.Cookies[AuthCookieKey.RefreshToken.Value];
             var command = new RefreshTokenCommand(refreshToken);
             await handler.HandleAsync(command);
+            var userDto = signInStorage.Get();
             
-            return Results.Ok();
+            return Results.Ok(userDto);
         });
         
         app.MapPost($"{Route}/logout", async (HttpContext httpContext, ICommandHandler<LogoutCommand> handler) =>

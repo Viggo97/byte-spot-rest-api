@@ -1,4 +1,5 @@
 ﻿using ByteSpot.Application.Abstractions;
+using ByteSpot.Application.Dto;
 using ByteSpot.Application.Security;
 using ByteSpot.Domain.Exceptions.Auth;
 using ByteSpot.Domain.Exceptions.User;
@@ -10,15 +11,18 @@ namespace ByteSpot.Application.Commands.Handlers;
 public class RefreshTokenHandler : ICommandHandler<RefreshTokenCommand>
 {
     private readonly IAuthenticator _authenticator;
+    private readonly ISignInStorage _signInStorage;
     private readonly IUserRepository _userRepository;
 
     public RefreshTokenHandler
     (
         IAuthenticator authenticator,
+        ISignInStorage signInStorage,
         IUserRepository userRepository
     )
     {
         _authenticator = authenticator;
+        _signInStorage = signInStorage;
         _userRepository = userRepository;
     }
 
@@ -57,5 +61,6 @@ public class RefreshTokenHandler : ICommandHandler<RefreshTokenCommand>
 
         _authenticator.AppendAuthTokenCookie(AuthCookieKey.AccessToken, accessToken, expires);
         _authenticator.AppendAuthTokenCookie(AuthCookieKey.RefreshToken, refreshToken.Token, refreshToken.ExpiresAt);
+        _signInStorage.Set(new UserDto(user.Id, user.FirstName, user.LastName));
     }
 }
