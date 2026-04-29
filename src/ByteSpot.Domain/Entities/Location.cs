@@ -16,4 +16,9 @@ public class Location
     }
 
     public static Location Create(Identifier id, Name name) => new(id, name);
+
+    public void ChangeName(string value)
+    {
+        Name = new Name(value);
+    }
 }
