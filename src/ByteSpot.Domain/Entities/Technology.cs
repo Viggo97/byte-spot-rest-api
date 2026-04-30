@@ -19,4 +19,14 @@ public class Technology
     }
     
     public static Technology Create(Identifier id, Name name, IconCode iconCode) => new(id, name, iconCode);
+    
+    public void ChangeName(string value)
+    {
+        Name = new Name(value);
+    }
+    
+    public void ChangeIconCode(string value)
+    {
+        IconCode = new IconCode(value);
+    }
 }
