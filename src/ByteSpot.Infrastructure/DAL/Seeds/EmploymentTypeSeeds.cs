@@ -10,11 +10,11 @@ class EmploymentTypeSeeds(ByteSpotDbContext dbContext)
 {
     public readonly IReadOnlyCollection<EmploymentType> EmploymentTypes =
     [
-        EmploymentType.Create(1, "EmploymentContract"),
-        EmploymentType.Create(2, "B2B"),
-        EmploymentType.Create(3, "MandateContract"),
-        EmploymentType.Create(4, "SpecificTaskContract"),
-        EmploymentType.Create(5, "Internship"),
+        EmploymentType.Create("EmploymentContract"),
+        EmploymentType.Create("B2B"),
+        EmploymentType.Create("MandateContract"),
+        EmploymentType.Create("SpecificTaskContract"),
+        EmploymentType.Create("Internship"),
     ];
     
     public readonly IReadOnlyCollection<EmploymentTypeTranslation> EmploymentTypeTranslations =
@@ -36,13 +36,13 @@ class EmploymentTypeSeeds(ByteSpotDbContext dbContext)
         if (!dbContext.EmploymentTypes.Any())
         {
             await dbContext.EmploymentTypes.AddRangeAsync(EmploymentTypes);
+            await dbContext.SaveChangesAsync();
         }
 
         if (!dbContext.EmploymentTypeTranslations.Any())
         {
             await dbContext.EmploymentTypeTranslations.AddRangeAsync(EmploymentTypeTranslations);
+            await dbContext.SaveChangesAsync();
         }
-        
-        await dbContext.SaveChangesAsync();
     }
 }

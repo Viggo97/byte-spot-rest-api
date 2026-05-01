@@ -20,4 +20,9 @@ public class EmploymentTypeTranslation
 
     public static EmploymentTypeTranslation Create(Identifier id, int employmentTypeId, LanguageCode languageCode, Name name)
         => new(id, employmentTypeId, languageCode, name);
+
+    public void ChangeName(Name name)
+    {
+        Name = name;
+    }
 }
