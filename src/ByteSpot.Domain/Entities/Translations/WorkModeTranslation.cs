@@ -20,4 +20,9 @@ public class WorkModeTranslation
 
     public static WorkModeTranslation Create(Identifier id, int workModeId, LanguageCode languageCode, Name name)
         => new(id, workModeId, languageCode, name);
+    
+    public void ChangeName(Name name)
+    {
+        Name = name;
+    }
 }
