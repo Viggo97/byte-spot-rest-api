@@ -20,4 +20,9 @@ public class ExperienceLevelTranslation
 
     public static ExperienceLevelTranslation Create(Identifier id, int experienceLevelId, LanguageCode languageCode, Name name)
         => new(id, experienceLevelId, languageCode, name);
+    
+    public void ChangeName(Name name)
+    {
+        Name = name;
+    }
 }
