@@ -1,6 +1,7 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
+using ByteSpot.Domain.Enums;
 using ByteSpot.Domain.Exceptions.Shared;
 using ByteSpot.Infrastructure.DAL.Database;
 using Microsoft.EntityFrameworkCore;
@@ -33,15 +34,28 @@ internal sealed class GetOfferDetailsHandler(ByteSpotDbContext dbContext)
                     s.EmploymentType.Translations.SingleOrDefault(t => t.LanguageCode == query.LanguageCode)!.Name)))
             .OrderBy(s => s.EmploymentType.Id)
             .ToList();
-        
+
         var workModes = offer.WorkModes
-            .Select(m => m.Translations.SingleOrDefault(t => t.LanguageCode == query.LanguageCode)!.Name.Value)
+            .Select(workMode =>
+            {
+                var translation =
+                    workMode.Translations.SingleOrDefault(t => t.LanguageCode == query.LanguageCode)
+                    ?? workMode.Translations.Single(t => t.LanguageCode == LanguageCode.En);
+                return translation.Name.Value;
+            })
             .ToList();
 
-        var experienceLevels = offer.ExperienceLevels.Select(l =>
-            l.Translations.SingleOrDefault(t => t.LanguageCode == query.LanguageCode)!.Name.Value).ToList();
+        var experienceLevels = offer.ExperienceLevels
+            .Select(experienceLevel =>
+            {
+                var translation =
+                    experienceLevel.Translations.SingleOrDefault(t => t.LanguageCode == query.LanguageCode)
+                    ?? experienceLevel.Translations.Single(t => t.LanguageCode == LanguageCode.En);
+                return translation.Name.Value;
+            })
+            .ToList();
 
-        
+
         return new OfferDetailsDto(
             offer.Id,
             offer.Title,
