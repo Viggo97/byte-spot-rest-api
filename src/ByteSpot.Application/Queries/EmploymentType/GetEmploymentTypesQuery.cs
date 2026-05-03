@@ -2,6 +2,6 @@
 using ByteSpot.Application.Dto;
 using ByteSpot.Domain.Enums;
 
-namespace ByteSpot.Application.Queries;
+namespace ByteSpot.Application.Queries.EmploymentType;
 
 public sealed record GetEmploymentTypesQuery(LanguageCode LanguageCode) : IQuery<IEnumerable<EmploymentTypeDto>>;

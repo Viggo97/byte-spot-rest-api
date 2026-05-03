@@ -1,7 +1,6 @@
 ﻿using ByteSpot.Api.Utils;
 using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Dto;
-using ByteSpot.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 using ByteSpot.Application.Commands.EmploymentType;
 using ByteSpot.Application.Queries.EmploymentType;
