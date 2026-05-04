@@ -13,13 +13,13 @@ public static class UserEndpoints
     {
         var usersGroup = app.MapGroup(Route).WithTags("Users");
         
-        usersGroup.MapPost($"{Route}/sign-up", async (SignUpCommand command, ICommandHandler<SignUpCommand> handler) =>
+        usersGroup.MapPost("/sign-up", async (SignUpCommand command, ICommandHandler<SignUpCommand> handler) =>
         {
             await handler.HandleAsync(command);
             return Results.Created();
         });
         
-        usersGroup.MapPost($"{Route}/sign-in", async (SignInCommand command, ICommandHandler<SignInCommand> handler,
+        usersGroup.MapPost("/sign-in", async (SignInCommand command, ICommandHandler<SignInCommand> handler,
             ISignInStorage signInStorage) =>
         {
             await handler.HandleAsync(command);
@@ -27,7 +27,7 @@ public static class UserEndpoints
             return Results.Ok(userDto);
         });
         
-        usersGroup.MapPost($"{Route}/refresh-token", async (HttpContext httpContext, ICommandHandler<RefreshTokenCommand> handler,
+        usersGroup.MapPost("/refresh-token", async (HttpContext httpContext, ICommandHandler<RefreshTokenCommand> handler,
             ISignInStorage signInStorage) =>
         {
             var refreshToken = httpContext.Request.Cookies[AuthCookieKey.RefreshToken.Value];
@@ -38,7 +38,7 @@ public static class UserEndpoints
             return Results.Ok(userDto);
         });
         
-        usersGroup.MapPost($"{Route}/logout", async (HttpContext httpContext, ICommandHandler<LogoutCommand> handler) =>
+        usersGroup.MapPost("/logout", async (HttpContext httpContext, ICommandHandler<LogoutCommand> handler) =>
         {
             var refreshToken = httpContext.Request.Cookies[AuthCookieKey.RefreshToken.Value];
             var command = new LogoutCommand(refreshToken);
