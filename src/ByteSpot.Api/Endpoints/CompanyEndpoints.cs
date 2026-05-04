@@ -1,6 +1,6 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Dto;
-using ByteSpot.Application.Queries;
+using ByteSpot.Application.Queries.Company;
 
 namespace ByteSpot.Api.Endpoints;
 
@@ -10,7 +10,9 @@ public static class CompanyEndpoints
     
     public static WebApplication MapCompanyEndpoints(this WebApplication app)
     {
-        app.MapGet($"{Route}/minimal", async (IQueryHandler<GetCompaniesMinimalQuery, IEnumerable<CompanyMinimalDto>> handler) =>
+        var companiesGroup = app.MapGroup(Route).WithTags("Companies");
+        
+        companiesGroup.MapGet("/minimal", async (IQueryHandler<GetCompaniesMinimalQuery, IEnumerable<CompanyMinimalDto>> handler) =>
         {
             var companies = await handler.HandleAsync(new GetCompaniesMinimalQuery());
             return Results.Ok(companies);

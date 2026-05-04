@@ -2,9 +2,9 @@
 using ByteSpot.Application.Dto;
 using ByteSpot.Domain.Repositories;
 
-namespace ByteSpot.Application.Queries.Handlers;
+namespace ByteSpot.Application.Queries.Company;
 
-public sealed class GetCompaniesHandler(ICompanyRepository companyRepository) 
+public sealed class GetCompaniesMinimalHandler(ICompanyRepository companyRepository) 
     : IQueryHandler<GetCompaniesMinimalQuery, IEnumerable<CompanyMinimalDto>>
 {
     public async Task<IEnumerable<CompanyMinimalDto>> HandleAsync(GetCompaniesMinimalQuery query)
