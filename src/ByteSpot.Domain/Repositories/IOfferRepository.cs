@@ -1,8 +1,12 @@
 ﻿using ByteSpot.Domain.Entities;
+using ByteSpot.Domain.ValueObjects.Shared;
 
 namespace ByteSpot.Domain.Repositories;
 
 public interface IOfferRepository
 {
-    Task<IEnumerable<Offer>> GetAllAsync();
+    IQueryable<Offer> GetAllAsync();
+    public Task<int> CountAllOffers();
+    Task<IEnumerable<Offer>> GetAllAsync(string title);
+    Task<Offer?> GetByIdAsync(Identifier id);
 }

@@ -1,22 +1,22 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Common;
 using ByteSpot.Application.Dto;
-using ByteSpot.Application.Queries;
-using ByteSpot.Domain.Entities;
-using ByteSpot.Infrastructure.DAL.Database;
-using Microsoft.EntityFrameworkCore;
+using ByteSpot.Domain.Repositories;
 
-namespace ByteSpot.Infrastructure.DAL.Handlers;
+namespace ByteSpot.Application.Queries.Offer;
 
-internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
-    : IQueryHandler<GetOffersQuery, PagedResult<OfferDto>>
+public sealed class GetOffersHandler : IQueryHandler<GetOffersQuery, PagedResult<OfferDto>>
 {
+    private readonly IOfferRepository _offerRepository;
+
+    public GetOffersHandler(IOfferRepository offerRepository)
+    {
+        _offerRepository = offerRepository;
+    }
+    
     public async Task<PagedResult<OfferDto>> HandleAsync(GetOffersQuery query)
     {
-        var offers = dbContext.Offers
-            .Include(offer => offer.Salaries)
-            .AsNoTracking()
-            .AsQueryable();
+        var offers = _offerRepository.GetAllAsync();
         var searchPhrase = query.SearchPhrase?.ToLower();
 
         if (query.SalaryMin is not null)
@@ -73,20 +73,21 @@ internal sealed class GetOffersHandler(ByteSpotDbContext dbContext)
             _ => offers.OrderBy(offer => offer.Title)
         };
         
-        var totalCount = await offers.CountAsync();
+        var totalCount = await _offerRepository.CountAllOffers();
 
-        var items = await offers
+        var items = offers
             .Skip((query.PageNumber - 1) * query.PageSize)
             .Take(query.PageSize)
             .Select(offer => new OfferDto(
-                        offer.Id,
-                        offer.Title,
-                        offer.Company.Name,
-                        offer.Salaries.Select(s => new SalaryDto(s.Min, s.Max, s.Fixed, s.Type, s.CurrencyCode, s.BillingUnit, new EmploymentTypeDto(s.EmploymentType.Id, s.EmploymentType.Value))).ToList(),
-                        offer.Locations.Select(l => l.Name.Value).ToList(),
-                        offer.Technologies.Select(t => t.Name.Value).ToList()
-                    )
-            ).ToListAsync();
+                    offer.Id,
+                    offer.Title,
+                    offer.Company.Name,
+                    offer.Salaries.Select(s => new SalaryDto(s.Min, s.Max, s.Fixed, s.Type, s.CurrencyCode,
+                        s.BillingUnit, new EmploymentTypeDto(s.EmploymentType.Id, s.EmploymentType.Value))).ToList(),
+                    offer.Locations.Select(l => l.Name.Value).ToList(),
+                    offer.Technologies.Select(t => t.Name.Value).ToList()
+                )
+            ).ToList();
         
         return new PagedResult<OfferDto>(
             Items: items,

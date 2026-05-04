@@ -2,7 +2,7 @@
 using ByteSpot.Application.Common;
 using ByteSpot.Application.Dto;
 
-namespace ByteSpot.Application.Queries;
+namespace ByteSpot.Application.Queries.Offer;
 
 public sealed record GetOffersQuery(
     int PageNumber,

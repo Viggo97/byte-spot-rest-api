@@ -3,6 +3,7 @@ using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Common;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
+using ByteSpot.Application.Queries.Offer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteSpot.Api.Endpoints;
@@ -13,7 +14,9 @@ public static class OfferEndpoints
 
     public static WebApplication MapOfferEndpoints(this WebApplication app)
     {
-        app.MapGet(Route, async (
+        var offersGroup = app.MapGroup(Route).WithTags("Offers");
+        
+        offersGroup.MapGet(Route, async (
             [FromServices] IQueryHandler<GetOffersQuery, PagedResult<OfferDto>> handler,
             [FromQuery(Name = "pageNumber")] int? pageNumber,
             [FromQuery(Name = "pageSize")] int? pageSize,
@@ -43,7 +46,7 @@ public static class OfferEndpoints
             return Results.Ok(offers);
         });
 
-        app.MapGet($"{Route}/suggestions", async (
+        offersGroup.MapGet($"{Route}/suggestions", async (
             [FromServices] IQueryHandler<GetOfferSuggestionsQuery, List<OfferSuggestionDto>> handler,
             [FromQuery(Name = "SearchPhrase")] string? searchPhrase) =>
         {
@@ -51,7 +54,7 @@ public static class OfferEndpoints
             return Results.Ok(suggestions);
         });
 
-        app.MapGet($"{Route}/{{id}}", async (Guid id, IQueryHandler<GetOfferDetailsQuery, OfferDetailsDto> handler,
+        offersGroup.MapGet($"{Route}/{{id}}", async (Guid id, IQueryHandler<GetOfferDetailsQuery, OfferDetailsDto> handler,
             HttpContext httpContext) =>
         {
             var languageCode = LanguageCodeConverter.Get(httpContext);

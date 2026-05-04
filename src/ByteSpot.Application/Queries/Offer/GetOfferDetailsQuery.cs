@@ -3,7 +3,7 @@ using ByteSpot.Application.Dto;
 using ByteSpot.Domain.Enums;
 using ByteSpot.Domain.ValueObjects.Shared;
 
-namespace ByteSpot.Application.Queries;
+namespace ByteSpot.Application.Queries.Offer;
 
 public sealed record GetOfferDetailsQuery : IQuery<OfferDetailsDto>
 {
