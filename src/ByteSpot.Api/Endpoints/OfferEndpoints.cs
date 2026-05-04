@@ -16,7 +16,7 @@ public static class OfferEndpoints
     {
         var offersGroup = app.MapGroup(Route).WithTags("Offers");
         
-        offersGroup.MapGet(Route, async (
+        offersGroup.MapGet("", async (
             [FromServices] IQueryHandler<GetOffersQuery, PagedResult<OfferDto>> handler,
             [FromQuery(Name = "pageNumber")] int? pageNumber,
             [FromQuery(Name = "pageSize")] int? pageSize,
@@ -46,7 +46,7 @@ public static class OfferEndpoints
             return Results.Ok(offers);
         });
 
-        offersGroup.MapGet($"{Route}/suggestions", async (
+        offersGroup.MapGet("/suggestions", async (
             [FromServices] IQueryHandler<GetOfferSuggestionsQuery, List<OfferSuggestionDto>> handler,
             [FromQuery(Name = "SearchPhrase")] string? searchPhrase) =>
         {
@@ -54,7 +54,7 @@ public static class OfferEndpoints
             return Results.Ok(suggestions);
         });
 
-        offersGroup.MapGet($"{Route}/{{id}}", async (Guid id, IQueryHandler<GetOfferDetailsQuery, OfferDetailsDto> handler,
+        offersGroup.MapGet("/{id}", async (Guid id, IQueryHandler<GetOfferDetailsQuery, OfferDetailsDto> handler,
             HttpContext httpContext) =>
         {
             var languageCode = LanguageCodeConverter.Get(httpContext);
