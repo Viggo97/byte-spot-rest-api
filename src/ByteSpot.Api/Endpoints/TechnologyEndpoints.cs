@@ -29,13 +29,14 @@ public static class TechnologyEndpoints
         technologiesGroup.MapPost("", async (AddTechnologyCommand command, ICommandHandler<AddTechnologyCommand> handler) =>
         {
             await handler.HandleAsync(command);
+            return Results.Created();
         });
         
         technologiesGroup.MapPut("{id:guid}", async (Guid id, [FromBody] UpdateTechnologyCommand command,
             ICommandHandler<UpdateTechnologyCommand> handler) =>
         {
-            var tmp = command with { Id = id };
-            await handler.HandleAsync(command);
+            var cmd = command with { Id = id };
+            await handler.HandleAsync(cmd);
 
             return Results.NoContent();
         });
