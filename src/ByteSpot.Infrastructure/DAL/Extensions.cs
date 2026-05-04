@@ -28,7 +28,8 @@ internal static class Extensions
             .AddScoped<IWorkModeRepository, PostgresWorkModeRepository>()
             .AddScoped<IExperienceLevelRepository, PostgresExperienceLevelRepository>()
             .AddScoped<IEmploymentTypeRepository, PostgresEmploymentTypeRepository>()
-            .AddScoped<IUserRepository, PostgresUserRepository>();
+            .AddScoped<IUserRepository, PostgresUserRepository>()
+            .AddScoped<ISuggestionRepository, PostgresSuggestionRepository>();
         
         return services;
     }
