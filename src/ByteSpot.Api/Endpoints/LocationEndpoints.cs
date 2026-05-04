@@ -35,13 +35,14 @@ public static class LocationEndpoints
         locationsGroup.MapPost("", async (AddLocationCommand command, ICommandHandler<AddLocationCommand> handler) =>
         {
             await handler.HandleAsync(command);
+            return Results.Created();
         });
         
         locationsGroup.MapPut("{id:guid}", async (Guid id, [FromBody] UpdateLocationCommand command,
             ICommandHandler<UpdateLocationCommand> handler) =>
         {
-            var tmp = command with { Id = id };
-            await handler.HandleAsync(command);
+            var cmd = command with { Id = id };
+            await handler.HandleAsync(cmd);
 
             return Results.NoContent();
         });
