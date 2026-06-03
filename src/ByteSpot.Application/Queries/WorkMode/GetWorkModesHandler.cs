@@ -20,7 +20,7 @@ internal sealed class GetWorkModesHandler
         var workModes = await _workModeRepository.GetAllAsync();
 
         return workModes.Select(workMode => new WorkModeDto(
-            workMode.Id,
+            workMode.Id.ToString(),
             workMode.Translations.Single(translation => translation.LanguageCode == languageCode).Name
             )
         );
