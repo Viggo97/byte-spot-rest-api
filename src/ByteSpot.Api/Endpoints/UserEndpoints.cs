@@ -8,46 +8,49 @@ namespace ByteSpot.Api.Endpoints;
 public static class UserEndpoints
 {
     private const string Route = "/api/users";
-    
+
     public static WebApplication MapUserEndpoints(this WebApplication app)
     {
         var usersGroup = app.MapGroup(Route).WithTags("Users");
-        
-        usersGroup.MapPost("/sign-up", async (SignUpCommand command, ICommandHandler<SignUpCommand> handler) =>
-        {
-            await handler.HandleAsync(command);
-            return Results.Created();
-        });
-        
-        usersGroup.MapPost("/sign-in", async (SignInCommand command, ICommandHandler<SignInCommand> handler,
-            ISignInStorage signInStorage) =>
-        {
-            await handler.HandleAsync(command);
-            var userDto = signInStorage.Get();
-            return Results.Ok(userDto);
-        });
-        
-        usersGroup.MapPost("/refresh-token", async (HttpContext httpContext, ICommandHandler<RefreshTokenCommand> handler,
-            ISignInStorage signInStorage) =>
-        {
-            var refreshToken = httpContext.Request.Cookies[AuthCookieKey.RefreshToken.Value];
-            var command = new RefreshTokenCommand(refreshToken);
-            await handler.HandleAsync(command);
-            var userDto = signInStorage.Get();
-            
-            return Results.Ok(userDto);
-        });
-        
-        usersGroup.MapPost("/logout", async (HttpContext httpContext, ICommandHandler<LogoutCommand> handler) =>
-        {
-            var refreshToken = httpContext.Request.Cookies[AuthCookieKey.RefreshToken.Value];
-            var command = new LogoutCommand(refreshToken);
-            await handler.HandleAsync(command);
-            
-            return Results.Ok();
-        });
-        
+
+        usersGroup
+            .MapPost("/sign-up", async (SignUpCommand command, ICommandHandler<SignUpCommand> handler) =>
+            {
+                await handler.HandleAsync(command);
+                return Results.Created();
+            });
+
+        usersGroup
+            .MapPost("/sign-in", async (SignInCommand command, ICommandHandler<SignInCommand> handler,
+                ISignInStorage signInStorage) =>
+            {
+                await handler.HandleAsync(command);
+                var userDto = signInStorage.Get();
+                return Results.Ok(userDto);
+            });
+
+        usersGroup
+            .MapPost("/refresh-token", async (HttpContext httpContext, ICommandHandler<RefreshTokenCommand> handler,
+                ISignInStorage signInStorage) =>
+            {
+                var refreshToken = httpContext.Request.Cookies[AuthCookieKey.RefreshToken.Value];
+                var command = new RefreshTokenCommand(refreshToken);
+                await handler.HandleAsync(command);
+                var userDto = signInStorage.Get();
+
+                return Results.Ok(userDto);
+            });
+
+        usersGroup
+            .MapPost("/logout", async (HttpContext httpContext, ICommandHandler<LogoutCommand> handler) =>
+            {
+                var refreshToken = httpContext.Request.Cookies[AuthCookieKey.RefreshToken.Value];
+                var command = new LogoutCommand(refreshToken);
+                await handler.HandleAsync(command);
+
+                return Results.Ok();
+            });
+
         return app;
     }
-    
 }
