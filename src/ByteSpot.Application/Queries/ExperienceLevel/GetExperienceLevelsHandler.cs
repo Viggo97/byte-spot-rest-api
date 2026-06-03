@@ -20,7 +20,7 @@ internal sealed class GetExperienceLevelsHandler
         var experienceLevels = await _experienceLevelRepository.GetAllAsync();
 
         return experienceLevels.Select(experienceLevel => new ExperienceLevelDto(
-            experienceLevel.Id,
+            experienceLevel.Id.ToString(),
             experienceLevel.Translations.Single(translation => translation.LanguageCode == languageCode).Name
             )
         );

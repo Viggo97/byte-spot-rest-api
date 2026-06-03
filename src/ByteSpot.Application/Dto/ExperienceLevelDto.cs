@@ -1,3 +1,3 @@
 ﻿namespace ByteSpot.Application.Dto;
 
-public sealed record ExperienceLevelDto(int Id, string Name);
+public sealed record ExperienceLevelDto(string Id, string Name);
