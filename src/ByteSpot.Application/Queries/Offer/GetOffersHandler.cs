@@ -73,7 +73,7 @@ public sealed class GetOffersHandler : IQueryHandler<GetOffersQuery, PagedResult
             _ => offers.OrderBy(offer => offer.Title)
         };
         
-        var totalCount = await _offerRepository.CountAllOffers();
+        var totalCount = offers.Count();
 
         var items = offers
             .Skip((query.PageNumber - 1) * query.PageSize)
@@ -83,7 +83,7 @@ public sealed class GetOffersHandler : IQueryHandler<GetOffersQuery, PagedResult
                     offer.Title,
                     offer.Company.Name,
                     offer.Salaries.Select(s => new SalaryDto(s.Min, s.Max, s.Fixed, s.Type, s.CurrencyCode,
-                        s.BillingUnit, new EmploymentTypeDto(s.EmploymentType.Id, s.EmploymentType.Value))).ToList(),
+                        s.BillingUnit, new EmploymentTypeDto(s.EmploymentType.Id.ToString(), s.EmploymentType.Value))).ToList(),
                     offer.Locations.Select(l => l.Name.Value).ToList(),
                     offer.Technologies.Select(t => t.Name.Value).ToList()
                 )
