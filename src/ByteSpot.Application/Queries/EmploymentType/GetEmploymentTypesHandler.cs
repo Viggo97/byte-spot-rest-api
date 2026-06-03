@@ -19,7 +19,7 @@ public sealed class GetEmploymentTypesHandler : IQueryHandler<GetEmploymentTypes
         var employmentTypes = await _employmentTypeRepository.GetAllAsync();
 
         return employmentTypes.Select(employmentType => new EmploymentTypeDto(
-                employmentType.Id,
+                employmentType.Id.ToString(),
                 employmentType.Translations.Single(translation => translation.LanguageCode == languageCode).Name
             )
         );

@@ -1,3 +1,3 @@
 ﻿namespace ByteSpot.Application.Dto;
 
-public sealed record EmploymentTypeDto(int Id, string Name);
+public sealed record EmploymentTypeDto(string Id, string Name);

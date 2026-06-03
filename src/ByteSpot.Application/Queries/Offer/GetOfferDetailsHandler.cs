@@ -27,7 +27,7 @@ internal sealed class GetOfferDetailsHandler
 
         var salaries = offer.Salaries.Select(s => new SalaryDto(
                 s.Min, s.Max, s.Fixed, s.Type, s.CurrencyCode, s.BillingUnit,
-                new EmploymentTypeDto(s.EmploymentType.Id,
+                new EmploymentTypeDto(s.EmploymentType.Id.ToString(),
                     s.EmploymentType.Translations.SingleOrDefault(t => t.LanguageCode == query.LanguageCode)!.Name)))
             .OrderBy(s => s.EmploymentType.Id)
             .ToList();
