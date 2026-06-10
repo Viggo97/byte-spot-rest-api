@@ -66,4 +66,9 @@ internal sealed class PostgresUserRepository : IUserRepository
             .Where(t => t.Token == refreshToken)
             .ExecuteDeleteAsync();
     }
+
+    public async Task<bool> IsEmailAvailableAsync(Email email)
+    {
+        return !await _dbContext.Users.AnyAsync(user => user.Email == email);
+    }
 }

@@ -1,7 +1,9 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Commands;
+using ByteSpot.Application.Queries.User;
 using ByteSpot.Application.Security;
 using ByteSpot.Domain.ValueObjects.User;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ByteSpot.Api.Endpoints;
 
@@ -49,6 +51,17 @@ public static class UserEndpoints
                 await handler.HandleAsync(command);
 
                 return Results.Ok();
+            });
+
+        usersGroup
+            .MapGet("/validate-email", async ([FromQuery(Name = "email")] string? email, IQueryHandler<GetEmailAvailabilityQuery, bool> handler) =>
+            {
+                if (email is null)
+                {
+                    return Results.BadRequest();
+                }
+                var isValid = await handler.HandleAsync(new  GetEmailAvailabilityQuery(email));
+                return Results.Ok(isValid);
             });
 
         return app;
