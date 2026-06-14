@@ -78,6 +78,14 @@ public static class UserEndpoints
                 await handler.HandleAsync(cmd);
                 return Results.Ok();
             });
+        
+        usersGroup
+            .MapPost("{id:guid}/change-password", async (Guid id, [FromBody] ChangePasswordCommand command, ICommandHandler<ChangePasswordCommand> handler) =>
+            {
+                var cmd = command with { Id = id };
+                await handler.HandleAsync(cmd);
+                return Results.Ok();
+            });
 
         return app;
     }

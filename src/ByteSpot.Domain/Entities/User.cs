@@ -39,4 +39,9 @@ public class User
     {
         LastName = new LastName(lastName);
     }
+
+    public void ChangePassword(Password password)
+    {
+        Password = password;
+    }
 }
