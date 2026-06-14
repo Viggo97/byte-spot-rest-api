@@ -1,6 +1,6 @@
 ﻿namespace ByteSpot.Domain.Exceptions.User;
 
-public class UserByEmailNotFoundException(string email) : CustomException($"User with email: {email} was not found.")
+public class UserByIdNotFoundException(Guid id) : CustomException($"User with id: {id} was not found.")
 {
-    public string Email { get; } = email;
+    public Guid Id { get; } = id;
 }

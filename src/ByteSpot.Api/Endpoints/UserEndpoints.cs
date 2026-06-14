@@ -1,5 +1,6 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Commands;
+using ByteSpot.Application.Commands.User;
 using ByteSpot.Application.Queries.User;
 using ByteSpot.Application.Security;
 using ByteSpot.Domain.ValueObjects.User;
@@ -62,6 +63,20 @@ public static class UserEndpoints
                 }
                 var isValid = await handler.HandleAsync(new  GetEmailAvailabilityQuery(email));
                 return Results.Ok(isValid);
+            });
+        
+        usersGroup
+            .MapPost("/change-password", async () =>
+            {
+                return Results.Ok();
+            });
+
+        usersGroup
+            .MapPut("{id:guid}", async (Guid id, [FromBody] UpdateUserCommand command, ICommandHandler<UpdateUserCommand> handler) =>
+            {
+                var cmd = command with { Id = id };
+                await handler.HandleAsync(cmd);
+                return Results.Ok();
             });
 
         return app;

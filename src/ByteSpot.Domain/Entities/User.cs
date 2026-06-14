@@ -29,4 +29,14 @@ public class User
     public static User Create(Identifier id, Email email, Password password, Role role, FirstName firstName,
         LastName lastName, DateTimeOffset createdAt)
         => new(id, email, password, role, firstName, lastName, createdAt);
+
+    public void ChangeFirstName(string firstName)
+    {
+        FirstName = new FirstName(firstName);
+    }
+    
+    public void ChangeLastName(string lastName)
+    {
+        LastName = new LastName(lastName);
+    }
 }
