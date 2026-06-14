@@ -38,7 +38,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
 
         var securedPassword = _passwordManager.Secure(password);
 
-        var user = User.Create(new Identifier(Guid.NewGuid()), email, securedPassword, role, firstName, lastName,
+        var user = Domain.Entities.User.Create(new Identifier(Guid.NewGuid()), email, securedPassword, role, firstName, lastName,
             DateTimeOffset.UtcNow);
 
         await _userRepository.AddAsync(user);
