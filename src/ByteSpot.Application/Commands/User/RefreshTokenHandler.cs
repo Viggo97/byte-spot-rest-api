@@ -6,7 +6,7 @@ using ByteSpot.Domain.Exceptions.User;
 using ByteSpot.Domain.Repositories;
 using ByteSpot.Domain.ValueObjects.User;
 
-namespace ByteSpot.Application.Commands.Handlers;
+namespace ByteSpot.Application.Commands.User;
 
 public class RefreshTokenHandler : ICommandHandler<RefreshTokenCommand>
 {

@@ -4,7 +4,7 @@ using ByteSpot.Domain.Exceptions.Auth;
 using ByteSpot.Domain.Repositories;
 using ByteSpot.Domain.ValueObjects.User;
 
-namespace ByteSpot.Application.Commands.Handlers;
+namespace ByteSpot.Application.Commands.User;
 
 internal sealed class LogoutHandler : ICommandHandler<LogoutCommand>
 {
