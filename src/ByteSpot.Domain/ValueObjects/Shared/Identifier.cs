@@ -26,6 +26,10 @@ public sealed record Identifier
         Value = Guid.Parse(value);
     }
 
+    public static Identifier Create() => new(Guid.NewGuid());
+    public static Identifier Create(Guid id) => new(id);
+    public static Identifier Create(string id) => new(id);
+
     public static implicit operator Guid(Identifier id)
         => id.Value;
     
