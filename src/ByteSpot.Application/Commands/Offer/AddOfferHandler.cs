@@ -1,5 +1,12 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Domain.Entities;
+using ByteSpot.Domain.Exceptions.Company;
+using ByteSpot.Domain.Exceptions.EmploymentType;
+using ByteSpot.Domain.Exceptions.ExperienceLevel;
+using ByteSpot.Domain.Exceptions.Location;
+using ByteSpot.Domain.Exceptions.Technology;
+using ByteSpot.Domain.Exceptions.User;
+using ByteSpot.Domain.Exceptions.WorkMode;
 using ByteSpot.Domain.Repositories;
 using ByteSpot.Domain.ValueObjects.Offer;
 using ByteSpot.Domain.ValueObjects.Shared;
@@ -14,6 +21,8 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
     private readonly IExperienceLevelRepository _experienceLevelRepository;
     private readonly IEmploymentTypeRepository _employmentTypeRepository;
     private readonly IOfferRepository _offerRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly IUserContext _userContext;
 
     public AddOfferHandler(
         ILocationRepository locationRepository,
@@ -21,7 +30,9 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
         IWorkModeRepository workModeRepository,
         IExperienceLevelRepository experienceLevelRepository,
         IEmploymentTypeRepository employmentTypeRepository,
-        IOfferRepository offerRepository
+        IOfferRepository offerRepository,
+        IUserRepository userRepository,
+        IUserContext userContext
         )
     {
         _locationRepository = locationRepository;
@@ -30,45 +41,62 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
         _experienceLevelRepository = experienceLevelRepository;
         _employmentTypeRepository = employmentTypeRepository;
         _offerRepository = offerRepository;
+        _userRepository = userRepository;
+        _userContext = userContext;
     }
     
     public async Task HandleAsync(AddOfferCommand command)
     {
-        var workModeIds = command.WorkModes.Distinct().Select(workMode => workMode.ToString()).ToList();
-        var workModes = await GetWorkModesAsync(workModeIds);
-        
-        var locationIds = command.Locations.Distinct().Select(location => new Identifier(location)).ToList();
-        var locations = await GetLocationsAsync(locationIds);
-        
-        var experienceLevelIds = command.ExperienceLevels.Distinct().Select(experienceLevel => experienceLevel.ToString()).ToList();
-        var experienceLevels = await GetExperienceLevelsAsync(experienceLevelIds);
-        
-        var technologyIds = command.Technologies.Distinct().Select(technology => new Identifier(technology)).ToList();
-        var technologies = await GetTechnologiesAsync(technologyIds);
-
-        var employmentTypeIds = command.Contracts.Select(contract => contract.EmploymentTypeId.ToString()).Distinct().ToList();
-        var  employmentTypes = await GetEmploymentTypesAsync(employmentTypeIds);
-        
-        var salaries = GetSalaries(command.Contracts, command.Id);
-
-        var createdAt = DateTimeOffset.UtcNow;
-        
-        var expiresAt = DateTimeOffset.UtcNow.AddDays(30);
-        
+        var id = Identifier.Create(command.Id);
         var title = new Title(command.Title);
         var description = new Description(command.Description);
+        var createdAt = DateTimeOffset.UtcNow;
+        var expiresAt = DateTimeOffset.UtcNow.AddDays(30);
+
+        var userIdFromContext = _userContext.Id;
+        if (userIdFromContext is null)
+        {
+            throw new UserNotFoundException();
+        }
+
+        var userId = Identifier.Create(userIdFromContext);
+        var user = await _userRepository.GetByIdAsync(userId);
+        if (user is null)
+        {
+            throw new UserByIdNotFoundException(userId);
+        }
         
-        //TODO Read base on user
-        var companyId = Identifier.Create("893ce20d-329c-4417-b68f-54a01572ab2d");
+        var companyId = user.CompanyId;
+        if (companyId is null)
+        {
+            throw new CompanyNotFoundException();
+        }
 
         var offer = Domain.Entities.Offer.Create(
-            command.Id,
+            id,
             title,
             companyId,
             createdAt,
             expiresAt,
             description
         );
+        
+        var workModeIds = command.WorkModes.Distinct().Select(workMode => workMode.ToString()).ToList();
+        var workModes = await GetWorkModesAsync(workModeIds);
+        
+        var locationIds = command.Locations.Distinct().Select(Identifier.Create).ToList();
+        var locations = await GetLocationsAsync(locationIds);
+        
+        var experienceLevelIds = command.ExperienceLevels.Distinct().Select(experienceLevel => experienceLevel.ToString()).ToList();
+        var experienceLevels = await GetExperienceLevelsAsync(experienceLevelIds);
+        
+        var technologyIds = command.Technologies.Distinct().Select(Identifier.Create).ToList();
+        var technologies = await GetTechnologiesAsync(technologyIds);
+
+        var employmentTypeIds = command.Contracts.Select(contract => contract.EmploymentTypeId.ToString()).Distinct().ToList();
+        var  employmentTypes = await GetEmploymentTypesAsync(employmentTypeIds);
+        
+        var salaries = GetSalaries(command.Contracts, id);
         
         offer.AddWorkModes(workModes);
         offer.AddLocations(locations);
@@ -86,8 +114,7 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
 
         if (existingWorkModes.Count < 1)
         {
-            throw new InvalidOperationException(
-                $"Zbyt malo");
+            throw new InvalidNumberOfWorkModesException();
         }
         
         var existingWorkModeIds = existingWorkModes.Select(workMode => workMode.Id.ToString());
@@ -95,8 +122,7 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
 
         if (missingWorkModeIds.Count > 0)
         {
-            throw new InvalidOperationException(
-                $"Nie znaleziono work Mode o ID: {string.Join(", ", missingWorkModeIds)}");
+            throw new WorkModesNotFoundException(missingWorkModeIds);
         }
 
         return existingWorkModes;
@@ -108,17 +134,15 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
         
         if (existingLocations.Count < 1)
         {
-            throw new InvalidOperationException(
-                $"Zbyt malo");
+            throw new InvalidNumberOfLocationsException();
         }
         
         var existingLocationIds = existingLocations.Select(location => location.Id);
-        var missingLocationIds = locationIds.Except(existingLocationIds).ToList();
+        var missingLocationIds = locationIds.Except(existingLocationIds).Select(x => x.Value.ToString()).ToList();
 
         if (missingLocationIds.Count > 0)
         {
-            throw new InvalidOperationException(
-                $"Nie znaleziono Location o ID: {string.Join(", ", missingLocationIds)}");
+            throw new LocationsNotFoundException(missingLocationIds);
         }
 
         return existingLocations;
@@ -130,8 +154,7 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
 
         if (existingExperienceLevels.Count < 1)
         {
-            throw new InvalidOperationException(
-                $"Zbyt malo");
+            throw new InvalidNumberOfExperienceLevelsException();
         }
         
         var existingExperienceLevelIds = existingExperienceLevels.Select(experienceLevel => experienceLevel.Id.ToString());
@@ -139,8 +162,7 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
 
         if (missingExperienceLevelIds.Count > 0)
         {
-            throw new InvalidOperationException(
-                $"Nie znaleziono missing ExperienceLevelIds o ID: {string.Join(", ", missingExperienceLevelIds)}");
+            throw new ExperienceLevelsNotFoundException(missingExperienceLevelIds);
         }
 
         return existingExperienceLevels;
@@ -152,17 +174,15 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
         
         if (existingTechnologies.Count < 1)
         {
-            throw new InvalidOperationException(
-                $"Zbyt malo");
+            throw new InvalidNumberOfTechnologiesException();
         }
         
         var existingTechnologyIds = existingTechnologies.Select(technology => technology.Id);
-        var missingTechnologyIds = technologyIds.Except(existingTechnologyIds).ToList();
+        var missingTechnologyIds = technologyIds.Except(existingTechnologyIds).Select(x => x.Value.ToString()).ToList();
 
         if (missingTechnologyIds.Count > 0)
         {
-            throw new InvalidOperationException(
-                $"Nie znaleziono Technology o ID: {string.Join(", ", missingTechnologyIds)}");
+            throw new TechnologiesNotFoundException(missingTechnologyIds);
         }
 
         return existingTechnologies;
@@ -174,8 +194,7 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
 
         if (existingEmploymentTypes.Count < 1)
         {
-            throw new InvalidOperationException(
-                $"Zbyt malo");
+            throw new InvalidNumberOfEmploymentTypesException();
         }
         
         var existingEmploymentTypeIds = existingEmploymentTypes.Select(employmentType => employmentType.Id.ToString());
@@ -183,8 +202,7 @@ public class AddOfferHandler : ICommandHandler<AddOfferCommand>
 
         if (missingEmploymentTypeIds.Count > 0)
         {
-            throw new InvalidOperationException(
-                $"Nie znaleziono missing EmploymentTypes o ID: {string.Join(", ", missingEmploymentTypeIds)}");
+            throw new EmploymentTypesNotFoundException(missingEmploymentTypeIds);
         }
 
         return existingEmploymentTypes;

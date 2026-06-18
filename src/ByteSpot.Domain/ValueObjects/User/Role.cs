@@ -7,9 +7,10 @@ namespace ByteSpot.Domain.ValueObjects.User;
 public sealed record Role
 {
     public static Role Admin() => new("Admin");
-    public static Role Employer() => new("Recruiter");
+    public static Role Employer() => new("Employer");
+    public static Role Recruiter() => new("Recruiter");
     public static Role Candidate() => new("Candidate");
-    public static IEnumerable<string> AvailableRoles { get; } = ["Admin", "Recruiter", "Candidate"];
+    public static IEnumerable<string> AvailableRoles { get; } = ["Admin", "Employer", "Recruiter", "Candidate"];
 
     public string Value { get; }
 

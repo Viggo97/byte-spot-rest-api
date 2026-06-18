@@ -1,11 +1,10 @@
 ﻿using ByteSpot.Application.Abstractions;
 using ByteSpot.Domain.Enums;
-using ByteSpot.Domain.ValueObjects.Shared;
 
 namespace ByteSpot.Application.Commands.Offer;
 
 public record AddOfferCommand(
-    Identifier Id,
+    string Id,
     string Title,
     IEnumerable<int> WorkModes,
     IEnumerable<string> Locations,

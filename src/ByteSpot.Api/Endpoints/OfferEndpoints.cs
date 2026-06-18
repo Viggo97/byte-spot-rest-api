@@ -7,6 +7,7 @@ using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
 using ByteSpot.Application.Queries.Offer;
 using ByteSpot.Domain.ValueObjects.Shared;
+using ByteSpot.Domain.ValueObjects.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteSpot.Api.Endpoints;
@@ -71,19 +72,16 @@ public static class OfferEndpoints
 
         offersGroup
             .MapPost("",
-                async (AddOfferCommand command, ICommandHandler<AddOfferCommand> handler, ClaimsPrincipal user) =>
+                async (AddOfferCommand command, ICommandHandler<AddOfferCommand> handler) =>
                 {
-                    var userId = user.Identity?.Name;
-                    if (string.IsNullOrEmpty(userId))
-                    {
-                        return Results.BadRequest();
-                    }
-                    var cmd = command with { Id = Identifier.Create() };
+                    var cmd = command with { Id = Identifier.Create().Value.ToString() };
                     await handler.HandleAsync(cmd);
                     return Results.Created();
                 })
-            //TODO Add roles
-            .RequireAuthorization();
+            .RequireAuthorization(builder =>
+            {
+                builder.RequireRole(Role.Employer(), Role.Recruiter());
+            });
 
         return app;
     }
