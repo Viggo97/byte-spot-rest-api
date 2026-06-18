@@ -28,6 +28,13 @@ internal sealed class PostgresWorkModeRepository : IWorkModeRepository
             .SingleOrDefaultAsync(workMode => workMode.Id == id);
     }
     
+    public async Task<IEnumerable<WorkMode>> GetByIdsAsync(List<string> filterIds)
+    {
+        return await _workModes
+            .Where(workMode => filterIds.Contains(workMode.Id.ToString()))
+            .ToListAsync();
+    }
+    
     public async Task AddAsync(WorkMode workMode)
     {
         await _workModes.AddAsync(workMode);
