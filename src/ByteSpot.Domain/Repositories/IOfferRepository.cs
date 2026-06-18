@@ -9,4 +9,5 @@ public interface IOfferRepository
     public Task<int> CountAllOffers();
     Task<IEnumerable<Offer>> GetAllAsync(string title);
     Task<Offer?> GetByIdAsync(Identifier id);
+    Task AddAsync(Offer offer);
 }

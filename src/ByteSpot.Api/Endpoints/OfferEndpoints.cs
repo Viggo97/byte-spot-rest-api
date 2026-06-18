@@ -1,9 +1,12 @@
-﻿using ByteSpot.Api.Utils;
+﻿using System.Security.Claims;
+using ByteSpot.Api.Utils;
 using ByteSpot.Application.Abstractions;
+using ByteSpot.Application.Commands.Offer;
 using ByteSpot.Application.Common;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries;
 using ByteSpot.Application.Queries.Offer;
+using ByteSpot.Domain.ValueObjects.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteSpot.Api.Endpoints;
@@ -65,6 +68,22 @@ public static class OfferEndpoints
                 var offerDetails = await handler.HandleAsync(new GetOfferDetailsQuery(id, languageCode));
                 return Results.Ok(offerDetails);
             });
+
+        offersGroup
+            .MapPost("",
+                async (AddOfferCommand command, ICommandHandler<AddOfferCommand> handler, ClaimsPrincipal user) =>
+                {
+                    var userId = user.Identity?.Name;
+                    if (string.IsNullOrEmpty(userId))
+                    {
+                        return Results.BadRequest();
+                    }
+                    var cmd = command with { Id = Identifier.Create() };
+                    await handler.HandleAsync(cmd);
+                    return Results.Created();
+                })
+            //TODO Add roles
+            .RequireAuthorization();
 
         return app;
     }

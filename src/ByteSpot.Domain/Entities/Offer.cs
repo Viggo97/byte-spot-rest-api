@@ -13,10 +13,10 @@ public class Offer
     public Company Company { get; private set; } = default!;
     public DateTimeOffset CreatedAt { get; private set; }
     public DateTimeOffset ExpiresAt { get; private set; }
-    public string Description { get; private set; }
+    public Description Description { get; private set; }
     public ICollection<Salary> Salaries { get; private set; } = new List<Salary>();
-    public int SalaryMinComputed { get; private set; } = default;
-    public int SalaryMaxComputed { get; private set; } = default;
+    public int SalaryMinComputed { get; private set; }
+    public int SalaryMaxComputed { get; private set; }
     public ICollection<Location> Locations { get; private set; } = new List<Location>();
     public ICollection<Technology> Technologies { get; private set; } = new List<Technology>();
     public ICollection<WorkMode> WorkModes { get; private set; } = new List<WorkMode>();
@@ -50,29 +50,77 @@ public class Offer
         SalaryMaxComputed = salaryMaxComputed;
     }
 
+    public void AddSalaries(IEnumerable<Salary> salaries)
+    {
+        foreach (var salary in salaries)
+        {
+            AddSalary(salary);
+        }
+    }
+
     public void AddLocation(Location location)
     {
         Locations.Add(location);
+    }
+    
+    public void AddLocations(IEnumerable<Location> locations)
+    {
+        foreach (var location in locations)
+        {
+            Locations.Add(location);
+        }
     }
 
     public void AddTechnology(Technology technology)
     {
         Technologies.Add(technology);
     }
+    
+    public void AddTechnologies(IEnumerable<Technology> technologies)
+    {
+        foreach (var technology in technologies)
+        {
+            Technologies.Add(technology);
+        }
+    }
 
     public void AddWorkMode(WorkMode workMode)
     {
         WorkModes.Add(workMode);
+    }
+    
+    public void AddWorkModes(IEnumerable<WorkMode> workModes)
+    {
+        foreach (var workMode in workModes)
+        {
+            WorkModes.Add(workMode);
+        }
     }
 
     public void AddExperienceLevel(ExperienceLevel experienceLevel)
     {
         ExperienceLevels.Add(experienceLevel);
     }
+    
+    public void AddExperienceLevels(IEnumerable<ExperienceLevel> experienceLevels)
+    {
+        foreach (var experienceLevel in experienceLevels)
+        {
+            ExperienceLevels.Add(experienceLevel);
+        }
+    }
 
     public void AddEmploymentType(EmploymentType employmentType)
     {
         EmploymentTypes.Add(employmentType);
+    }
+    
+    public void AddEmploymentTypes(IEnumerable<EmploymentType> employmentTypes)
+    {
+        foreach (var employmentType in employmentTypes)
+        {
+            EmploymentTypes.Add(employmentType);
+        }
     }
 
     private static void CalculateComputedSalary(ICollection<Salary> salaries, out int min, out int max)

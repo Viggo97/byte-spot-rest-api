@@ -50,4 +50,9 @@ internal sealed class PostgresOfferRepository : IOfferRepository
             .Include(offer => offer.Salaries).ThenInclude(s => s.EmploymentType).ThenInclude(t => t.Translations)
             .SingleOrDefaultAsync(offer => offer.Id == id);
     }
+
+    public async Task AddAsync(Offer offer)
+    {
+        await _offers.AddAsync(offer);
+    }
 }

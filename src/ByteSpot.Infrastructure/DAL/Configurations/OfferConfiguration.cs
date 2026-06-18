@@ -21,7 +21,8 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
 
         builder
             .Property(offer => offer.Description)
-            .HasMaxLength(1200);
+            .HasMaxLength(1200)
+            .HasConversion(description => description.Value, value => new Description(value));
 
         builder
             .HasMany(offer => offer.Salaries)
