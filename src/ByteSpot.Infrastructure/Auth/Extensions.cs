@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -45,6 +46,8 @@ public static class Extensions
             });
 
         services.AddAuthorization();
+
+        services.AddScoped<IUserContext, HttpUserContext>();
         
         return services;
     }
