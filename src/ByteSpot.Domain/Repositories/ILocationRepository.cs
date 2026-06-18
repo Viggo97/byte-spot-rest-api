@@ -8,6 +8,7 @@ public interface ILocationRepository
     Task<Location?> GetByIdAsync(Identifier id); 
     Task<Location?> GetByNameAsync(Name name); 
     Task<IEnumerable<Location>> GetAllAsync();
+    Task<IEnumerable<Location>> GetByIdsAsync(List<Identifier> filterIds);
     Task AddAsync(Location location);
     Task UpdateAsync(Location location);
     Task RemoveAsync(Identifier id);

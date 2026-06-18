@@ -38,6 +38,13 @@ internal sealed class PostgresLocationRepository : ILocationRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Location>> GetByIdsAsync(List<Identifier> filterIds)
+    {
+        return await _locations
+            .Where(location => filterIds.Contains(location.Id))
+            .ToListAsync();
+    }
+
     public async Task AddAsync(Location location)
     {
         await _locations.AddAsync(location);
