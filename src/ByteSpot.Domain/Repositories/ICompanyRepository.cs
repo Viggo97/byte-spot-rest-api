@@ -5,4 +5,5 @@ namespace ByteSpot.Domain.Repositories;
 public interface ICompanyRepository
 {
     Task<IEnumerable<Company>> GetAllAsync();
+    Task AddAsync(Company company);
 }

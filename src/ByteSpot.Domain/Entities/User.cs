@@ -12,6 +12,8 @@ public class User
     public FirstName FirstName { get; private set; }
     public LastName LastName { get; private set; }
     public DateTimeOffset CreatedAt { get; private set; }
+    public Company? Company { get; private set; }
+    public Identifier? CompanyId { get; private set; }
     public RefreshToken? RefreshToken { get; set; }
 
     private User(Identifier id, Email email, Password password, Role role, FirstName firstName, LastName lastName,
@@ -43,5 +45,10 @@ public class User
     public void ChangePassword(Password password)
     {
         Password = password;
+    }
+
+    public void AddCompany(Company company)
+    {
+        Company = company;
     }
 }

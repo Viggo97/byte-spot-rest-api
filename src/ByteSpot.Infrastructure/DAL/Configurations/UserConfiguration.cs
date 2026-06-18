@@ -50,5 +50,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .Property(user=> user.CreatedAt)
             .IsRequired();
+        
+        builder
+            .Property(offer => offer.CompanyId)
+            .HasConversion(
+                id => id != null ? id.Value : (Guid?)null,
+                value => value.HasValue ? new Identifier(value.Value) : null
+                );
     }
 }

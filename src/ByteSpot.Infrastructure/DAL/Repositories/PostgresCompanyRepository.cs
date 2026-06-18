@@ -13,4 +13,9 @@ internal sealed class PostgresCompanyRepository(ByteSpotDbContext dbContext) : I
     {
         return await _companies.ToListAsync();
     }
+
+    public async Task AddAsync(Company company)
+    {
+        await _companies.AddAsync(company);
+    }
 }
