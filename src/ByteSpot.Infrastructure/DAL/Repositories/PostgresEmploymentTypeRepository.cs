@@ -27,6 +27,13 @@ internal sealed class PostgresEmploymentTypeRepository : IEmploymentTypeReposito
             .Include(employmentType => employmentType.Translations)
             .SingleOrDefaultAsync(employmentType => employmentType.Id == id);
     }
+
+    public async Task<IEnumerable<EmploymentType>> GetByIdsAsync(List<string> filterIds)
+    {
+        return await _employmentTypes
+            .Where(experienceLevel => filterIds.Contains(experienceLevel.Id.ToString()))
+            .ToListAsync();
+    }
     
     public async Task AddAsync(EmploymentType employmentType)
     {
