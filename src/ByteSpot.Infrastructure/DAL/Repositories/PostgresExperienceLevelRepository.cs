@@ -27,6 +27,13 @@ internal sealed class PostgresExperienceLevelRepository : IExperienceLevelReposi
             .Include(experienceLevel => experienceLevel.Translations)
             .SingleOrDefaultAsync(experienceLevel => experienceLevel.Id == id);
     }
+
+    public async Task<IEnumerable<ExperienceLevel>> GetByIdsAsync(List<string> filterIds)
+    {
+        return await _experienceLevels
+            .Where(experienceLevel => filterIds.Contains(experienceLevel.Id.ToString()))
+            .ToListAsync();
+    }
     
     public async Task AddAsync(ExperienceLevel experienceLevel)
     {
