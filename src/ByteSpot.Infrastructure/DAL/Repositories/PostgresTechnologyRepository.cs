@@ -27,6 +27,13 @@ internal sealed class PostgresTechnologyRepository : ITechnologyRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Technology>> GetByIdsAsync(List<Identifier> filterIds)
+    {
+        return await _technologies
+            .Where(technology => filterIds.Contains(technology.Id))
+            .ToListAsync();
+    }
+
     public async Task AddAsync(Technology technology)
     {
         await _technologies.AddAsync(technology);

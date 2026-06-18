@@ -7,6 +7,7 @@ public interface ITechnologyRepository
 {
     Task<Technology?> GetByIdAsync(Identifier id);
     Task<IEnumerable<Technology>> GetAllAsync();
+    Task<IEnumerable<Technology>> GetByIdsAsync(List<Identifier> filterIds);
     Task AddAsync(Technology technology);
     Task UpdateAsync(Technology technology);
     Task RemoveAsync(Identifier id);
