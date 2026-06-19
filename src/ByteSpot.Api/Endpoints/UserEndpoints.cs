@@ -62,7 +62,7 @@ public static class UserEndpoints
                     return Results.BadRequest();
                 }
                 var isValid = await handler.HandleAsync(new  GetEmailAvailabilityQuery(email));
-                return Results.Ok(isValid);
+                return isValid ? Results.Ok() : Results.Conflict();
             });
         
         usersGroup
