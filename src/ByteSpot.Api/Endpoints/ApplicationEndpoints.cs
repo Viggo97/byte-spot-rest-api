@@ -1,6 +1,8 @@
 ﻿using ByteSpot.Api.Files;
 using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Commands.Application;
+using ByteSpot.Application.Dto;
+using ByteSpot.Application.Queries.Application;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteSpot.Api.Endpoints;
@@ -12,6 +14,13 @@ public static class ApplicationEndpoints
     public static WebApplication MapApplicationEndpoints(this WebApplication app)
     {
         var applicationsGroup = app.MapGroup(Route).WithTags("Applications");
+
+        applicationsGroup
+            .MapGet("/offer/{id:guid}", async (Guid id, IQueryHandler<GetApplicationsByOfferIdQuery, IEnumerable<ApplicationDto>> handler) =>
+            {
+                var applications = await  handler.HandleAsync(new GetApplicationsByOfferIdQuery(id));
+                return Results.Ok(applications);
+            });
         
         applicationsGroup
             .MapPost("", async ([FromForm] AddApplicationDocument data ,ICommandHandler<AddApplicationCommand> handler) =>

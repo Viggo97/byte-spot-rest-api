@@ -1,4 +1,5 @@
 ﻿using ByteSpot.Domain.Repositories;
+using ByteSpot.Domain.ValueObjects.Shared;
 using ByteSpot.Infrastructure.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,13 @@ internal sealed class PostgresApplicationRepository(ByteSpotDbContext dbContext)
     public async Task<IEnumerable<Domain.Entities.Application>> GetAllAsync()
     {
         return await _applications.ToListAsync();
+    }
+
+    public async Task<IEnumerable<Domain.Entities.Application>> GetAllByOfferIdAsync(Identifier offerId)
+    {
+        return await _applications
+            .AsNoTracking()
+            .Where(application => application.OfferId == offerId).ToListAsync();
     }
 
     public async Task AddAsync(Domain.Entities.Application application)
