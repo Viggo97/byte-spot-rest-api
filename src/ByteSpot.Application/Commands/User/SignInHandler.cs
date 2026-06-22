@@ -52,6 +52,6 @@ internal sealed class SignInHandler : ICommandHandler<SignInCommand>
 
         _authenticator.AppendAuthTokenCookie(AuthCookieKey.AccessToken, accessToken, expires);
         _authenticator.AppendAuthTokenCookie(AuthCookieKey.RefreshToken, refreshToken.Token, refreshToken.ExpiresAt);
-        _signInStorage.Set(new UserDto(user.Id, user.FirstName, user.LastName));
+        _signInStorage.Set(new UserDto(user.Id, user.FirstName, user.LastName, user.Email, user.Role));
     }
 }
