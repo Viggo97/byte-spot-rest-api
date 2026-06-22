@@ -16,6 +16,6 @@ internal sealed class GetOffersByCompanyIdHandler : IQueryHandler<GetOffersByCom
     public async Task<IEnumerable<OfferApplicationDto>> HandleAsync(GetOffersByCompanyIdQuery query)
     {
         var offers = await _offerRepository.GetAllByCompanyIdAsync(query.Id);
-        return offers.Select(offer => new OfferApplicationDto(offer.Id, offer.Title));
+        return offers.Select(offer => new OfferApplicationDto(offer.Id, offer.Title, offer.ExpiresAt.ToUnixTimeMilliseconds()));
     }
 }
