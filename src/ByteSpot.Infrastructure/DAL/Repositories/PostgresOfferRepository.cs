@@ -38,6 +38,15 @@ internal sealed class PostgresOfferRepository : IOfferRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Offer>> GetAllByCompanyIdAsync(Identifier id)
+    {
+        return await _offers
+            .AsNoTracking()
+            .Where(offer => offer.CompanyId == id)
+            .OrderBy(offer => offer.CreatedAt)
+            .ToListAsync();
+    }
+
     public async Task<Offer?> GetByIdAsync(Identifier id)
     {
         return await _offers

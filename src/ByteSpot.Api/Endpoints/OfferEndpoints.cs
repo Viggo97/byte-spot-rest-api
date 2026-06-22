@@ -60,6 +60,13 @@ public static class OfferEndpoints
                 var suggestions = await handler.HandleAsync(new GetOfferSuggestionsQuery(searchPhrase));
                 return Results.Ok(suggestions);
             });
+        
+        offersGroup
+            .MapGet("/company/{id:guid}", async (Guid id, IQueryHandler<GetOffersByCompanyIdQuery, IEnumerable<OfferApplicationDto>> handler) =>
+            {
+                var offerDetails = await handler.HandleAsync(new GetOffersByCompanyIdQuery(id));
+                return Results.Ok(offerDetails);
+            });
 
         offersGroup
             .MapGet("/{id}", async (Guid id, IQueryHandler<GetOfferDetailsQuery, OfferDetailsDto> handler,
