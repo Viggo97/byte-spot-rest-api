@@ -37,6 +37,7 @@ app
     .MapTechnologyEndpoints()
     .MapWorkModeEndpoints()
     .MapExperienceLevelEndpoints()
-    .MapEmploymentTypeEndpoints();
+    .MapEmploymentTypeEndpoints()
+    .MapApplicationEndpoints();
 
 app.Run();
