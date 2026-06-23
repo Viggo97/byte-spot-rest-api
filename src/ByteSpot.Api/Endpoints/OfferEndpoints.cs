@@ -76,6 +76,13 @@ public static class OfferEndpoints
                 var offerDetails = await handler.HandleAsync(new GetOfferDetailsQuery(id, languageCode));
                 return Results.Ok(offerDetails);
             });
+        
+        offersGroup
+            .MapGet("/minimal/{id}", async (Guid id, IQueryHandler<GetOfferMinimalQuery, OfferMinimalDto> handler) =>
+            {
+                var offerMinimal = await handler.HandleAsync(new GetOfferMinimalQuery(id));
+                return Results.Ok(offerMinimal);
+            });
 
         offersGroup
             .MapPost("",
