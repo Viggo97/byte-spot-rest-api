@@ -5,7 +5,7 @@ using ByteSpot.Application.Queries.Location;
 using ByteSpot.Domain.ValueObjects.User;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ByteSpot.Api.Endpoints;
+namespace ByteSpot.Bootstrapper.Endpoints;
 
 public static class LocationEndpoints
 {

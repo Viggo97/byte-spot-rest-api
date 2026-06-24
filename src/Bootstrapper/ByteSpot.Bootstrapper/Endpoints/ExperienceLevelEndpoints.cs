@@ -1,4 +1,4 @@
-﻿using ByteSpot.Api.Utils;
+﻿using ByteSpot.Bootstrapper.Utils;
 using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Commands.ExperienceLevel;
@@ -6,7 +6,7 @@ using ByteSpot.Application.Queries.ExperienceLevel;
 using ByteSpot.Domain.ValueObjects.User;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ByteSpot.Api.Endpoints;
+namespace ByteSpot.Bootstrapper.Endpoints;
 
 public static class ExperienceLevelEndpoints
 {

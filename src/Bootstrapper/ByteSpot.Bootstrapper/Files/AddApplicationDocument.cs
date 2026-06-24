@@ -1,4 +1,4 @@
-﻿namespace ByteSpot.Api.Files;
+﻿namespace ByteSpot.Bootstrapper.Files;
 
 public sealed record AddApplicationDocument(
     string OfferId,

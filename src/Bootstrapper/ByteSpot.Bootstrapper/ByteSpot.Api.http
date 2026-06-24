@@ -1,0 +1,53 @@
+@baseUrl = http://localhost:5000/api
+
+### Tworzenie nowego zasobu (Metoda POST)
+POST {{baseUrl}}/offers
+Content-Type: application/json
+
+{
+  "title": "wwwwwwwwwwwwwwwww",
+  "workModes": [
+    "1",
+    "2"
+  ],
+  "locations": [
+    "b912639e-5879-43c7-8123-877216cca43a",
+    "6f0d0918-96eb-4251-86b6-1b821f0053a5"
+  ],
+  "experienceLevels": [
+    "1"
+  ],
+  "technologies": [
+    "2557dbcc-8b98-44b1-a005-b63641fd21ee"
+  ],
+  "contracts": [
+    {
+      "employmentTypeId": "1",
+      "salaryFixed": 2,
+      "salaryType": "NET",
+      "currencyCode": "PLN",
+      "billingUnit": "HOUR"
+    }
+  ],
+  "description": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+}
+
+### Register company
+POST {{baseUrl}}/companies
+Content-Type: application/json
+
+{
+  "name": "ACME",
+  "email": "mic@mic.com",
+  "password": "test1234",
+  "userFirstName": "Chuck",
+  "userLastName": "Noris"
+}
+
+### 
+GET {{baseUrl}}/offers/company/893ce20d-329c-4417-b68f-54a01572ab2d
+Accept: application/json
+
+### 
+GET {{baseUrl}}/applications/offer/7ee41092-960f-4b93-8a8d-27fb32e30855
+Accept: application/json

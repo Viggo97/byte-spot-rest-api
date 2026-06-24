@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ByteSpot.Bootstrapper</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ByteSpot.Infrastructure\ByteSpot.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\ByteSpot.Infrastructure\ByteSpot.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

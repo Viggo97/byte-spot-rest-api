@@ -1,4 +1,4 @@
-﻿namespace ByteSpot.Api.Cors;
+﻿namespace ByteSpot.Bootstrapper.Cors;
 
 public static class CorsConfiguration
 {

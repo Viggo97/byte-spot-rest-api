@@ -1,7 +1,7 @@
-﻿using ByteSpot.Api.Cors;
+﻿using ByteSpot.Bootstrapper.Cors;
 using ByteSpot.Infrastructure;
 
-namespace ByteSpot.Api;
+namespace ByteSpot.Bootstrapper;
 
 public static class Extensions
 {

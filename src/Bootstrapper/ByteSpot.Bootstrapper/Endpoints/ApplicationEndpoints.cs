@@ -1,11 +1,11 @@
-﻿using ByteSpot.Api.Files;
+﻿using ByteSpot.Bootstrapper.Files;
 using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Commands.Application;
 using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries.Application;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ByteSpot.Api.Endpoints;
+namespace ByteSpot.Bootstrapper.Endpoints;
 
 public static class ApplicationEndpoints
 {

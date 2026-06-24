@@ -1,6 +1,6 @@
-using ByteSpot.Api;
-using ByteSpot.Api.Cors;
-using ByteSpot.Api.Endpoints;
+using ByteSpot.Bootstrapper;
+using ByteSpot.Bootstrapper.Cors;
+using ByteSpot.Bootstrapper.Endpoints;
 using ByteSpot.Application;
 using ByteSpot.Domain;
 using ByteSpot.Infrastructure;

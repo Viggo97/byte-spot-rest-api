@@ -4,7 +4,7 @@ using ByteSpot.Application.Dto;
 using ByteSpot.Application.Queries.Company;
 using ByteSpot.Domain.ValueObjects.Shared;
 
-namespace ByteSpot.Api.Endpoints;
+namespace ByteSpot.Bootstrapper.Endpoints;
 
 public static class CompanyEndpoints
 {

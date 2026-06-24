@@ -6,7 +6,7 @@ using ByteSpot.Application.Security;
 using ByteSpot.Domain.ValueObjects.User;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ByteSpot.Api.Endpoints;
+namespace ByteSpot.Bootstrapper.Endpoints;
 
 public static class UserEndpoints
 {

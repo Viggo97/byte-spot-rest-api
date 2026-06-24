@@ -1,4 +1,4 @@
-﻿using ByteSpot.Api.Utils;
+﻿using ByteSpot.Bootstrapper.Utils;
 using ByteSpot.Application.Abstractions;
 using ByteSpot.Application.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +6,7 @@ using ByteSpot.Application.Commands.EmploymentType;
 using ByteSpot.Application.Queries.EmploymentType;
 using ByteSpot.Domain.ValueObjects.User;
 
-namespace ByteSpot.Api.Endpoints;
+namespace ByteSpot.Bootstrapper.Endpoints;
 
 public static class EmploymentTypeEndpoints
 {

@@ -1,6 +1,6 @@
 ﻿using ByteSpot.Domain.Enums;
 
-namespace ByteSpot.Api.Utils;
+namespace ByteSpot.Bootstrapper.Utils;
 
 public static class LanguageCodeConverter
 {
