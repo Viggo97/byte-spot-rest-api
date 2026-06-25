@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ByteSpot.Infrastructure\ByteSpot.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\ByteSpot.Shared.Infrastructure\ByteSpot.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
