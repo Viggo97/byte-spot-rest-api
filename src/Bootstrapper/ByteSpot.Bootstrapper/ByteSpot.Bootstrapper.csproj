@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ByteSpot.Infrastructure\ByteSpot.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Shared\ByteSpot.Shared.Abstractions\ByteSpot.Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Modules\Companies\ByteSpot.Modules.Companies.Api\ByteSpot.Modules.Companies.Api.csproj" />
   </ItemGroup>
 
 </Project>

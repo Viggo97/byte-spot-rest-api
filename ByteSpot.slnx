@@ -8,7 +8,12 @@
     <Project Path="src/Bootstrapper/ByteSpot.Bootstrapper/ByteSpot.Bootstrapper.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
-  <Folder Name="/src/Modules/Companies/" />
+  <Folder Name="/src/Modules/Companies/">
+    <Project Path="src/Modules/Companies/ByteSpot.Modules.Companies.Api/ByteSpot.Modules.Companies.Api.csproj" />
+    <Project Path="src/Modules/Companies/ByteSpot.Modules.Companies.Application/ByteSpot.Modules.Companies.Application.csproj" />
+    <Project Path="src/Modules/Companies/ByteSpot.Modules.Companies.Domain/ByteSpot.Modules.Companies.Domain.csproj" />
+    <Project Path="src/Modules/Companies/ByteSpot.Modules.Companies.Infrastructure/ByteSpot.Modules.Companies.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/ByteSpot.Shared.Abstractions/ByteSpot.Shared.Abstractions.csproj" />
     <Project Path="src/Shared/ByteSpot.Shared.Infrastructure/ByteSpot.Shared.Infrastructure.csproj" />
