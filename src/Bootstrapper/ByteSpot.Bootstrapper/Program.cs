@@ -4,6 +4,7 @@ using ByteSpot.Bootstrapper.Endpoints;
 using ByteSpot.Application;
 using ByteSpot.Domain;
 using ByteSpot.Infrastructure;
+using ByteSpot.Shared.Infrastructure.Modules;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,12 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApi(builder.Configuration)
     .AddOpenApi();
+
+builder.Host.ConfigureModules();
+var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
+var modules = ModuleLoader.LoadModules(assemblies);
+
+RegisterModules();
 
 var app = builder.Build();
 
@@ -40,4 +47,32 @@ app
     .MapEmploymentTypeEndpoints()
     .MapApplicationEndpoints();
 
+UseModules();
+
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation($"Modules: {string.Join(", ",  modules.Select(m => m.Name))}");
+
+assemblies.Clear();
+modules.Clear();
+
 app.Run();
+
+
+return;
+
+void RegisterModules()
+{
+    foreach (var module in modules)
+    {
+        module.Register(builder.Services);
+    }
+}
+
+void UseModules()
+{
+    foreach (var module in modules)
+    {
+        module.Use(app);
+        module.Expose(app);
+    }
+}
