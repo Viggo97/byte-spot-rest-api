@@ -14,4 +14,8 @@
       <ProjectReference Include="..\ByteSpot.Shared.Abstractions\ByteSpot.Shared.Abstractions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Humanizer" Version="3.0.10" />
+    </ItemGroup>
+
 </Project>

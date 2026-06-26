@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using ByteSpot.Shared.Infrastructure.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
@@ -7,13 +8,16 @@ namespace ByteSpot.Shared.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddModuleInfrastructure(this IServiceCollection services)
     {
+        services.AddErrorHandlingHandler();
         return services;
     }
 
-    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
+    public static IApplicationBuilder UseModuleInfrastructure(this IApplicationBuilder app)
     {
+        app.UseErrorHandling();
+        
         return app;
     }
 }
