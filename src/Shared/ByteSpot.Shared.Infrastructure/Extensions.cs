@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using ByteSpot.Shared.Infrastructure.Exceptions;
+using ByteSpot.Shared.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +14,8 @@ internal static class Extensions
         IConfiguration configuration)
     {
         services
-            .AddErrorHandlingHandler();
+            .AddErrorHandlingHandler()
+            .AddHostedService<AppInitializer>();
         
         return services;
     }
