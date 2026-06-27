@@ -11,6 +11,9 @@ internal static class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services
+            .AddModulePostgres<CompaniesDbContext>(configuration);
+            
         return services;
     }
 }

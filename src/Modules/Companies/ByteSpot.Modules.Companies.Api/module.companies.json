@@ -1,7 +1,7 @@
 {
   "Companies": {
     "module": {
-      "enabled": false
+      "enabled": true
     }
   }
 }
