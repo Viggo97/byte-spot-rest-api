@@ -20,7 +20,7 @@ builder.Services
 builder.Host.ConfigureModules();
 var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
 var modules = ModuleLoader.LoadModules(assemblies);
-builder.Services.AddModuleInfrastructure();
+builder.Services.AddModuleInfrastructure(builder.Configuration);
 RegisterModules();
 
 var app = builder.Build();
@@ -65,7 +65,7 @@ void RegisterModules()
 {
     foreach (var module in modules)
     {
-        module.Register(builder.Services);
+        module.Register(builder.Services, builder.Configuration);
     }
 }
 

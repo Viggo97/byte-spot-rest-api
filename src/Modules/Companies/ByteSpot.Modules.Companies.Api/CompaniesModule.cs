@@ -3,6 +3,7 @@ using ByteSpot.Modules.Companies.Domain;
 using ByteSpot.Modules.Companies.Infrastructure;
 using ByteSpot.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ByteSpot.Modules.Companies.Api;
@@ -13,12 +14,12 @@ internal class CompaniesModule : IModule
     public string Name { get; } = "Companies";
     public string Path => BasePath;
     
-    public void Register(IServiceCollection services)
+    public void Register(IServiceCollection services, IConfiguration configuration)
     {
         services
             .AddDomain()
             .AddApplication()
-            .AddInfrastructure();
+            .AddInfrastructure(configuration);
     }
 
     public void Use(IApplicationBuilder builder)
