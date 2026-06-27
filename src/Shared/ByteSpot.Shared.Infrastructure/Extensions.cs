@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using ByteSpot.Shared.Infrastructure.Auth;
 using ByteSpot.Shared.Infrastructure.Exceptions;
 using ByteSpot.Shared.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ internal static class Extensions
     {
         services
             .AddErrorHandlingHandler()
+            .AddAuth(configuration)
             .AddHostedService<AppInitializer>();
         
         return services;
