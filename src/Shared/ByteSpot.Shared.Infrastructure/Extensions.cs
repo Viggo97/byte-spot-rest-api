@@ -1,6 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using ByteSpot.Shared.Infrastructure.Auth;
+using ByteSpot.Shared.Infrastructure.Commands;
 using ByteSpot.Shared.Infrastructure.Exceptions;
+using ByteSpot.Shared.Infrastructure.Queries;
 using ByteSpot.Shared.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -12,12 +15,14 @@ namespace ByteSpot.Shared.Infrastructure;
 internal static class Extensions
 {
     public static IServiceCollection AddModuleInfrastructure(this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration, IList<Assembly> assemblies)
     {
         services
             .AddErrorHandlingHandler()
             .AddAuth(configuration)
-            .AddHostedService<AppInitializer>();
+            .AddHostedService<AppInitializer>()
+            .AddCommands(assemblies)
+            .AddQueries(assemblies);
         
         return services;
     }

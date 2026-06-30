@@ -20,7 +20,7 @@ builder.Services
 builder.Host.ConfigureModules();
 var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
 var modules = ModuleLoader.LoadModules(assemblies);
-builder.Services.AddModuleInfrastructure(builder.Configuration);
+builder.Services.AddModuleInfrastructure(builder.Configuration, assemblies);
 RegisterModules();
 
 var app = builder.Build();
