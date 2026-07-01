@@ -14,6 +14,12 @@
     <Project Path="src/Modules/Companies/ByteSpot.Modules.Companies.Domain/ByteSpot.Modules.Companies.Domain.csproj" />
     <Project Path="src/Modules/Companies/ByteSpot.Modules.Companies.Infrastructure/ByteSpot.Modules.Companies.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Modules/Users/">
+    <Project Path="src/Modules/Users/ByteSpot.Modules.Users.Api/ByteSpot.Modules.Users.Api.csproj" />
+    <Project Path="src/Modules/Users/ByteSpot.Modules.Users.Application/ByteSpot.Modules.Users.Application.csproj" />
+    <Project Path="src/Modules/Users/ByteSpot.Modules.Users.Domain/ByteSpot.Modules.Users.Domain.csproj" />
+    <Project Path="src/Modules/Users/ByteSpot.Modules.Users.Infrastructure/ByteSpot.Modules.Users.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/ByteSpot.Shared.Abstractions/ByteSpot.Shared.Abstractions.csproj" />
     <Project Path="src/Shared/ByteSpot.Shared.Infrastructure/ByteSpot.Shared.Infrastructure.csproj" />
